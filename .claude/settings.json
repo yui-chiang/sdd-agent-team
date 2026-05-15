@@ -1,0 +1,36 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Agent",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '\n⚠️  ADR REMINDER: 若此次 agent 輸出已 APPROVED，必須立即新增 ADR entry（PRINCIPLE-04）。使用 /adr-new 或呼叫 adr_manager skill。'"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"$CLAUDE_TOOL_INPUT\" | grep -qiE '(API_KEY|SECRET|TOKEN|PASSWORD)\\s*=' && echo '\\n⚠️  SECURITY ALERT（ADR-S004）: 偵測到潛在 secret 操作。確認此 secret 透過環境變數注入，不得 hardcode 進原始碼。' || true"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '\n═══════════════════════════════════════\nSESSION END CHECKLIST\n═══════════════════════════════════════\n[ ] 所有 APPROVED 任務是否已新增 ADR entry？（/adr-new）\n[ ] 如有 Phase Gate 可清除，是否已通知 PM？（/phase-gate）\n[ ] PRD 版本是否需要更新？（prd_maintainer skill）\n[ ] 所有 in_progress agent 的狀態是否已更新？\n═══════════════════════════════════════'"
+          }
+        ]
+      }
+    ]
+  }
+}
