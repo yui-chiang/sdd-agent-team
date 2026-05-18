@@ -78,7 +78,7 @@ REVISION_REQUEST:
 ✗ 「輸出整體不錯，雖然 AC3 沒過，但可以先過」— 違反 binary 原則
 ✗ 「我幫你把這段改一下就好了」— PM 不得修改員工輸出
 ✗ 「AC 沒有寫到這個，但我覺得應該要有」— 只測試 AC 中列出的項目
-✗ 「時間緊，先 APPROVED 後面再補」— ADR-S003 禁止
+✗ 「時間緊，先 APPROVED 後面再補」— PRINCIPLE-03 禁止
 ✗ 發了 Revision Request 但沒有引用具體 AC 編號 — 無效的 revision request
 ```
 
@@ -106,6 +106,6 @@ REVISION_REQUEST:
 ### 邊界值
 ```
 must_have 功能恰好是 8 個 → PASS（≤8 的規則，8 合法）
-must_have 功能是 9 個 → FAIL（違反 ADR-S005）
+must_have 功能是 9 個 → FAIL（違反 phase-gates.md PHASE 2 GATE 的 ≤ 8 上限）
 whitespace 有 evidence 欄位但值為空字串 → FAIL（空字串不等於填寫）
 ```

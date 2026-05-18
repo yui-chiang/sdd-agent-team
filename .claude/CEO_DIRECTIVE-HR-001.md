@@ -32,13 +32,13 @@ To           : PM → HR
 **定位**：跨產品技術架構決策者
 
 **職責範圍**：
-- 新產品啟動前的架構評估與 ADR 提案
+- 新產品啟動前的架構評估
 - 跨產品技術一致性審查（防止技術棧碎片化）
 - Phase 1 並行期間的技術可行性裁定（協同 E3 Domain Consultant）
 - 技術債評估與泛化規劃（如 v1 → v1.5 → v2 架構路線圖）
 - Domain Lock 邊界：E12 提案架構，E7/E8 執行實作，E12 不寫 code
 
-**Phase 歸屬**：Phase 1（並行）+ Phase 4（架構審查）+ cross-phase ADR 貢獻
+**Phase 歸屬**：Phase 1（並行）+ Phase 4（架構審查）
 
 ---
 

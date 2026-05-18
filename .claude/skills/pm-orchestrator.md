@@ -77,7 +77,7 @@ Phase 5（QA）       → E10
   - 當前 phase 的 gate checklist
   - 預期完成時間（若已知）
 
-PM 此時可以去做其他事（寫 PRD、更新 ADR），
+PM 此時可以去做其他事（寫 PRD），
 E9 負責監視，有狀況再通知 PM。
 ```
 
@@ -89,7 +89,7 @@ E9 負責監視，有狀況再通知 PM。
 2. 對照 Task Spec 的 Acceptance Criteria 逐條驗證
 3. 產出 Validation Report（PASS / FAIL）
 4. 若 FAIL → 發出 Revision Request，E9 重新派工
-5. 若 PASS → 更新 ADR，檢查 Phase Gate
+5. 若 PASS → 更新 PRD，檢查 Phase Gate
 
 當 E9 發出 GATE_READY alert：
 1. PM 執行 gate checklist 最終確認
@@ -104,7 +104,7 @@ E9 負責監視，有狀況再通知 PM。
 PM 在此 skill 中只能輸出：
 - Task Specifications
 - Validation Reports
-- ADR entries
+- PRD updates
 - Phase gate decisions
 
 PM 不得輸出 code、design、research 內容（RULE-PM-01 ~ 07）

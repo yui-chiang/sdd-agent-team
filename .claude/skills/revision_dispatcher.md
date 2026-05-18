@@ -54,7 +54,7 @@ REVISION_REQUEST:
     - [如果適用，說明一個常見的誤解]
 
   Reference:
-    [若相關，引用適用的 ADR 條目編號]
+    [若相關，引用適用的 PRD 約束或 phase-gate 條件]
 ```
 
 ---

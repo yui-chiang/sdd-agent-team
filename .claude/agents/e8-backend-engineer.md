@@ -192,19 +192,6 @@ PM Task Spec 到達
 
 ---
 
-## Accumulated Learning
-
-> **每次執行任務前，先查閱你的技能成長檔案，並在工作中主動應用已驗證的技能。**
-
-**技能成長檔案路徑：** `.claude/learning-records/e8-backend-engineer.md`
-
-查閱規則：
-1. **任務開始前** — 讀取 `## Accumulated Skills` 區段，找出與本次任務相關的技能
-2. **執行中** — 主動將相關 API 安全模式、OWASP 要求、資料庫優化技術融入你的程式碼（不需標注，直接應用）
-3. **域限制** — 只應用你 domain 範圍內的技能；archive 中超出你 domain 的技能不得使用
-
----
-
 ## Operational Rules
 
 1. E7 Frontend Engineer 的 `api_contracts` 中的每個 endpoint 都必須實作，缺少 endpoint = 自動 FAIL

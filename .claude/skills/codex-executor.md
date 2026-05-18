@@ -53,7 +53,7 @@ codex --version
 | JSON schema / Zod schema 生成 | 有安全要求的 endpoint |
 | 資料轉換腳本（CSV↔JSON、格式化） | Phase 4 正式交付物 |
 | 測試資料 fixture 生成 | 需要 DB schema 或 migration |
-| 簡單的 CLI 工具腳本 | 任何需要 ADR 記錄的技術決策 |
+| 簡單的 CLI 工具腳本 | 任何需要正式 Task Spec 驗收的技術決策 |
 
 ---
 
@@ -138,7 +138,7 @@ Codex 執行後，PM 必須對輸出進行 Validation。驗證檢查清單：
 [ ] 輸出檔案已在正確路徑建立
 [ ] 程式碼無語法錯誤（可用 tsc --noEmit 或 python -m py_compile 驗證）
 [ ] 函數簽名符合 Task Spec 要求
-[ ] 沒有 hardcoded secrets（ADR-S004）
+[ ] 沒有 hardcoded secrets（security-baseline.md SEC-01）
 [ ] 沒有引入未授權的第三方套件
 [ ] 實作符合 Task Spec 的所有 AC
 ```
@@ -195,6 +195,6 @@ cat src/api/response.json | codex exec "根據這個 JSON 範例，
   - 需要 API 設計決策
   - 涉及 DB schema 或 migration
   - 跨多個模組的整合
-  - 需要記錄 ADR 的技術決策
+  - 需要正式 Task Spec 驗收的技術決策
   - 估計 > 50 行或影響 > 2 個檔案
 ```

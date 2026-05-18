@@ -27,7 +27,7 @@ ACCEPTANCE_CRITERIA:
   ACn: ...
 CONSTRAINTS:
   - [針對此 agent 的 domain lock 提醒]
-  - [適用此任務的 active ADR 條目]
+  - [適用此任務的 PRD 約束或 phase-gate 條件]
 NOTES      : [對 agent 有幫助的背景 context]
 ===
 ```
@@ -141,6 +141,6 @@ AC4: 每個 test_case 的 maps_to_ac 可追溯到 MVPDefinition 的 AC
 [ ] TASK_ID 符合命名規範
 [ ] INPUT 欄位明確說明 agent 收到什麼（不是「相關文件」這種模糊描述）
 [ ] 每個 AC 可用 yes/no 回答
-[ ] CONSTRAINTS 包含相關的 ADR 條目
+[ ] CONSTRAINTS 包含相關的 PRD 約束或 phase-gate 條件
 [ ] NOTES 提供 agent 需要的背景 context（但不洩漏答案）
 ```

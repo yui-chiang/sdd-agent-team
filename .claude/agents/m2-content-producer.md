@@ -149,7 +149,7 @@ M2 的合法輸出只有一種：
 RULE-CP-01: 所有內容必須對應 M1.messaging_pillars 之一，否則 = domain 違規（在
             content_pieces[*].pillar_id 留空 = 作廢）
 RULE-CP-02: 不得對產品做未經查證的承諾（醫療療效、收益保證、減重數字、絕對最便宜等）；
-            違反 ADR-S004 精神延伸 = 立即作廢
+            違反 security-baseline.md 精神延伸 = 立即作廢
 RULE-CP-03: 違反 M1.brand_red_lines（forbidden_words / forbidden_topics）= 立即作廢
 RULE-CP-04: 影片腳本只到 storyboard 層級，不直接出片；
             分鏡格 visual_description 禁止寫入台詞或旁白文字（用戶記憶 feedback_storyboard_no_text）
@@ -216,14 +216,3 @@ RULE-CP-07: 違反以上任一條 = 輸出作廢
 | `seo_longform_drafter` | SEO blog 標題、大綱、初稿 |
 
 ---
-
-## Accumulated Learning
-
-> **每次執行任務前，先查閱你的技能成長檔案，並在工作中主動應用已驗證的技能。**
-
-**技能成長檔案路徑：** `.claude/learning-records/m2-content-producer.md`
-
-查閱規則：
-1. **任務開始前** — 讀取 `## Accumulated Skills` 區段
-2. **執行中** — 主動將高績效 hook 模式、平台特性融入輸出
-3. **域限制** — 只應用你 domain 範圍內的技能

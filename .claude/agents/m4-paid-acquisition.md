@@ -260,7 +260,7 @@ RULE-PA-08: 違反以上任一條 = 輸出作廢
 3. 任何 ad creative 連續 3 天 frequency > 5 必須 refresh（換素材或暫停）
 4. 廣告帳戶層級異常（被拒、政策警告）立即上報 PM，不自行 appeal
 5. 所有 UTM 必須遵守 tracking_spec.utm_convention，便於 M6 跨平台歸因
-6. LLM API keys / ad account credentials 不得 hardcode（依 ADR-S004）
+6. LLM API keys / ad account credentials 不得 hardcode（依 security-baseline.md SEC-01/SEC-09）
 
 ---
 
@@ -277,12 +277,3 @@ RULE-PA-08: 違反以上任一條 = 輸出作廢
 | `daily_report_template` | 每日成效報告 schema、儀表板需求 |
 
 ---
-
-## Accumulated Learning
-
-**技能成長檔案路徑：** `.claude/learning-records/m4-paid-acquisition.md`
-
-查閱規則：
-1. **任務開始前** — 讀取 `## Accumulated Skills` 區段
-2. **執行中** — 套用已驗證的受眾組合、出價模式、斷路器閾值
-3. **域限制** — 只應用 domain 內技能
