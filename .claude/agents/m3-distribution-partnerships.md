@@ -246,12 +246,3 @@ RULE-DP-07: 違反以上任一條 = 輸出作廢
 | `partnership_sla_drafter` | 合作 SLA、違約處理、續約標準 |
 
 ---
-
-## Accumulated Learning
-
-**技能成長檔案路徑：** `.claude/learning-records/m3-distribution-partnerships.md`
-
-查閱規則：
-1. **任務開始前** — 讀取 `## Accumulated Skills` 區段
-2. **執行中** — 主動套用已驗證的 KOL 評估指標、外展模板、社群 placement 模式
-3. **域限制** — 只應用你 domain 範圍內的技能

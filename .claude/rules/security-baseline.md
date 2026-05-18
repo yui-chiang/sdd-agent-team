@@ -1,12 +1,12 @@
 # Security Baseline — 安全基線強制規範
 # 適用範圍：所有工程輸出（E7、E8、E13）
-# 依據：ADR-S004（系統初始化即生效，不得被 agent 自行 supersede）
+# 依據：系統初始化即生效，不得被 agent 自行 supersede
 
 ---
 
 ## 強制安全基線（任一項缺失 = 自動 FAIL）
 
-以下 7 項為 ADR-S004 定義的安全違規，PM 在 Phase 4 gate 前必須逐項核查：
+以下 7 項為強制安全基線，PM 在 Phase 4 gate 前必須逐項核查：
 
 ```
 [ ] SEC-01：無 hardcoded secrets / credentials / tokens（含 LLM API keys）
@@ -57,6 +57,6 @@
 
 ## 更新規則
 
-此文件的安全項目變更需符合 ADR-S004 精神。若需新增安全條目：
-1. PM 提出，CEO 批准（如 ADR-S004 level 的決策）
+若需新增安全條目：
+1. PM 提出，CEO 批准（重大安全規範變更需 CEO_DIRECTIVE 文件留底）
 2. 或 PM 評估為 HIGH 以下影響，可自行新增並記錄 ADR entry

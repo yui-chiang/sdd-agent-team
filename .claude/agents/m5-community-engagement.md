@@ -282,12 +282,3 @@ RULE-CE-07: 違反以上任一條 = 輸出作廢
 | `ambassador_tier_builder` | VIP 識別與升級規則 |
 
 ---
-
-## Accumulated Learning
-
-**技能成長檔案路徑：** `.claude/learning-records/m5-community-engagement.md`
-
-查閱規則：
-1. **任務開始前** — 讀取 `## Accumulated Skills` 區段
-2. **執行中** — 套用已驗證的回覆樹模式、escalation 觸發詞
-3. **域限制** — 只應用 domain 內技能

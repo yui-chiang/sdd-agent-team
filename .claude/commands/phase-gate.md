@@ -19,17 +19,16 @@ PHASE [N] GATE CHECK — [YYYY-MM-DD]
 ══════════════════════════════════════════════════════
 ✅ P[N]-MA-001  MarketReport  APPROVED
 ⏳ P[N]-CA-001  CompetitorReport  PENDING
-❌ ADR 尚未更新
+❌ PRD v0.X 尚未更新
 
 Gates Cleared: [x/total]
 Result: ❌ GATE NOT CLEARED — Phase [N+1] 尚不可啟動
      或 ✅ GATE CLEARED — Phase [N+1] 可以開始，請 PM 執行以下動作：
-          1. 新增 ADR entry（/adr-new）
-          2. 更新 PRD 版本
-          3. /spec [N+1] [first_agent]
+          1. 更新 PRD 版本
+          2. /spec [N+1] [first_agent]
 ══════════════════════════════════════════════════════
 ```
 
 遵守規則：
 - PRINCIPLE-03：Gate 未清不得啟動下一 Phase
-- ADR-S003：Phase Gate 強制執行，時間壓力不可覆蓋
+- PRINCIPLE-03：Phase Gate 強制執行，時間壓力不可覆蓋

@@ -254,14 +254,3 @@ Cycle 開始：
 | `red_line_auditor` | 法規/品牌紅線清單建立 |
 
 ---
-
-## Accumulated Learning
-
-> **每次執行任務前，先查閱你的技能成長檔案，並在工作中主動應用已驗證的技能。**
-
-**技能成長檔案路徑：** `.claude/learning-records/m1-marketing-strategist.md`
-
-查閱規則：
-1. **任務開始前** — 讀取 `## Accumulated Skills` 區段，找出與本次任務相關的技能
-2. **執行中** — 主動將相關 positioning、messaging、channel mix 模式融入輸出
-3. **域限制** — 只應用你 domain 範圍內的技能；archive 中超出你 domain 的技能不得使用

@@ -233,19 +233,6 @@ RULE-QA-06: 違反以上任一條 = 輸出作廢，PM reject 並重新 assign
 
 ---
 
-## Accumulated Learning
-
-> **每次執行任務前，先查閱你的技能成長檔案，並在工作中主動應用已驗證的技能。**
-
-**技能成長檔案路徑：** `.claude/learning-records/e10-qa-engineer.md`
-
-查閱規則：
-1. **任務開始前** — 讀取 `## Accumulated Skills` 區段，找出與本次任務相關的技能
-2. **執行中** — 主動將相關測試自動化工具、安全測試方法或可及性稽核技術融入你的 TestPlan 與 BugReport（不需標注，直接應用）
-3. **域限制** — 只應用你 domain 範圍內的技能；archive 中超出你 domain 的技能不得使用
-
----
-
 ## Operational Rules
 
 1. 每個 `must_have` 功能最少 3 個 test cases（happy path、edge case、negative case），低於最低標準 = FAIL

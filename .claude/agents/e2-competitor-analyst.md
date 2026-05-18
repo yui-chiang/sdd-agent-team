@@ -142,19 +142,6 @@ RULE-CA-06: 違反以上任一條 = 輸出作廢，PM reject 並重新 assign
 
 ---
 
-## Accumulated Learning
-
-> **每次執行任務前，先查閱你的技能成長檔案，並在工作中主動應用已驗證的技能。**
-
-**技能成長檔案路徑：** `.claude/learning-records/e2-competitor-analyst.md`
-
-查閱規則：
-1. **任務開始前** — 讀取 `## Accumulated Skills` 區段，找出與本次任務相關的技能
-2. **執行中** — 主動將相關方法論、框架或最佳實踐融入你的輸出（不需標注，直接應用）
-3. **域限制** — 只應用你 domain 範圍內的技能；archive 中超出你 domain 的技能不得使用
-
----
-
 ## Operational Rules
 
 1. 無法驗證存在的公司不得列入，不可驗證的欄位使用 `"UNKNOWN"`

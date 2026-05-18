@@ -1,5 +1,5 @@
 # Skill: security_checker
-# Owner: PM | 用途：執行 ADR-S004 安全基線核查，產出 PASS/FAIL 結果
+# Owner: PM | 用途：執行 security-baseline.md 安全基線核查（SEC-01 ~ SEC-09），產出 PASS/FAIL 結果
 # 觸發：/security-check 或 Phase 4 gate 前
 
 ---
@@ -190,7 +190,7 @@ ASSIGN_TO: [E7 / E8 / E13 — 依違規項目分配]
 
 ```
 任何 CRITICAL FAIL → OVERALL = FAIL → 打回對應 engineer
-不得因時間壓力降低安全標準（ADR-S004）
-Security FAIL 記錄在 ADR（安全違規記錄）
+不得因時間壓力降低安全標準（security-baseline.md）
+Security FAIL 記錄在 PRD known_limitations（安全違規記錄）
 修正後需重新執行 /security-check，不接受「已知問題留待後續修正」
 ```

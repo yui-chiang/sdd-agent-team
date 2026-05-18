@@ -1,6 +1,6 @@
 # Skill: hr-onboarding
 # Owner: HR | 用途：標準化新 agent 的設計與 onboarding 流程
-# 確保每個新 agent 符合 ADR-S001 至 ADR-S005，不破壞 Phase Gate 結構
+# 確保每個新 agent 符合系統原則（rules/global.md）與安全基線（rules/security-baseline.md），不破壞 Phase Gate 結構
 
 ---
 
@@ -9,7 +9,7 @@
 當 PM 申請新增 agent 時，HR 使用此 skill 執行標準化的 agent 設計流程，確保：
 1. 新 agent 的 domain 邊界不與現有 agents 重疊
 2. 新 agent 的格式符合系統標準
-3. RULE-HR-06 被系統化執行（不違反 ADR-S001 至 ADR-S005）
+3. RULE-HR-06 被系統化執行（不違反 rules/global.md 的系統原則與 security-baseline.md）
 
 ---
 
@@ -38,26 +38,26 @@ Q7. 這個新增是否影響現有 Phase Gate 結構？
 
 ---
 
-## Step 2：ADR 合規性核查（RULE-HR-06）
+## Step 2：系統原則合規性核查（RULE-HR-06）
 
 ```
-在設計前，確認新 agent 不違反以下 Standing ADR：
+在設計前，確認新 agent 不違反以下系統原則與規則：
 
-ADR-S001（Domain Lock）：
+PRINCIPLE-01（Domain Lock）：
   [ ] 新 agent 的 domain 未與現有 agent 重疊
   [ ] 若有邊界灰色地帶，明確說明由誰負責（不接受 "both can do it"）
 
-ADR-S002（PM 永不產出內容）：
+PRINCIPLE-02（PM 永不產出內容）：
   [ ] 新 agent 的輸出不應是 PM 本來就能輸出的類型（Task Spec、Validation Report 等）
 
-ADR-S003（Phase Gate 強制執行）：
+PRINCIPLE-03（Phase Gate 強制執行）：
   [ ] 新 agent 的 phase 指定明確（不能跨越未定義的 phase 邊界）
   [ ] 若影響 gate 結構，需在 Hiring Report 的 phase_gate_impact 中說明
 
-ADR-S004（安全違規自動 FAIL）：
+security-baseline.md（安全違規自動 FAIL）：
   [ ] 若新 agent 涉及工程輸出，其 domain lock 包含安全違規即時違規條款
 
-ADR-S005（must_have ≤ 8）：
+must_have ≤ 8（見 phase-gates.md PHASE 2 GATE）：
   [ ] 新 agent 不應允許 E4 以外的 agents 決定 MVP scope
 ```
 
@@ -111,9 +111,6 @@ RULE-[CODE]-04: [違規處置]
 
 ## Skills
 [此 agent 使用的 skills 清單]
-
-## Accumulated Learning
-[參考 .claude/learning-records/ 的路徑]
 ```
 
 ---
@@ -127,7 +124,7 @@ Date         : [YYYY-MM-DD]
 Prepared by  : HR
 New Agent    : [name]（[code]）
 Requested by : PM
-CEO Approval : [ADR reference] | NOT_REQUIRED
+CEO Approval : [CEO_DIRECTIVE reference] | NOT_REQUIRED
 Phase        : [phase]
 Document     : .claude/agents/[filename].md
 
@@ -143,12 +140,12 @@ DOMAIN LOCK SUMMARY:
   Can produce : [一行描述]
   Cannot produce: [一行描述，與現有 agents 的邊界]
 
-ADR_COMPLIANCE_CHECK:
-  ADR-S001 (Domain Lock)  : PASS | CONFLICT（說明）
-  ADR-S002 (PM Content)   : PASS | CONFLICT
-  ADR-S003 (Phase Gates)  : PASS | CONFLICT
-  ADR-S004 (Security)     : PASS | N/A
-  ADR-S005 (MVP Cap)      : PASS | N/A
+PRINCIPLE_COMPLIANCE_CHECK:
+  PRINCIPLE-01 (Domain Lock) : PASS | CONFLICT（說明）
+  PRINCIPLE-02 (PM Content)  : PASS | CONFLICT
+  PRINCIPLE-03 (Phase Gates) : PASS | CONFLICT
+  Security Baseline          : PASS | N/A
+  MVP Cap (≤ 8 features)     : PASS | N/A
 
 ACCEPTANCE_CRITERIA:
   AC1: 新 agent 文件包含所有必要區塊（Identity, System Prompt, Output Schema, Domain Lock, Skills）
@@ -167,8 +164,7 @@ ACCEPTANCE_CRITERIA:
 [ ] System Prompt 完整（可直接用於開啟 child session）
 [ ] Output Schema 完整（JSON agent 必須有欄位定義）
 [ ] Domain Lock 規則 ≥ 4 條，格式為 RULE-[CODE]-[N]
-[ ] ADR compliance check 全部 PASS 或有合理說明
+[ ] Principle compliance check 全部 PASS 或有合理說明
 [ ] Hiring Report 已完整填寫所有欄位
 [ ] 文件存放於 .claude/agents/[code]-[name].md（小寫，連字符）
-[ ] 對應 learning record 已建立：.claude/learning-records/[code]-[name].md
 ```

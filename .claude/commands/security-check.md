@@ -1,4 +1,4 @@
-# /security-check — 執行 ADR-S004 安全基線核查
+# /security-check — 執行 security-baseline.md 安全基線核查（SEC-01 ~ SEC-09）
 # 用法：/security-check [target]
 # 範例：/security-check E8   → 只核查 Backend
 #       /security-check all  → 核查 E7+E8+E13
@@ -37,5 +37,5 @@ DECISION: APPROVED | REVISION_REQUIRED
 ```
 
 遵守規則：
-- ADR-S004：安全違規 = 自動 FAIL，強制 revision
+- security-baseline.md：安全違規 = 自動 FAIL，強制 revision
 - 任何 FAIL 必須 assign 給對應 engineer 修正後重跑 /security-check

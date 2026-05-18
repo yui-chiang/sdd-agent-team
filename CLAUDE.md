@@ -25,7 +25,7 @@
 ### 此文件不應包含的內容
 
 - 任何特定專案的功能需求、技術選型、設計決策
-- 特定專案的 PRD、ADR、Task Spec
+- 特定專案的 PRD、Task Spec
 - 任何只適用於單一專案的規則或例外
 
 ### 專案層級變更規則（Project-Level Changes）
@@ -49,7 +49,6 @@ PM 在啟動任何新專案時，必須：
 
 1. 在專案資料夾內建立 `CLAUDE.md`（繼承公司章規，加入專案特定設定）
 2. 若有與公司章規的衝突或例外，在專案 `CLAUDE.md` 中明確標注，並上報 CEO 決定是否同步更新公司層級規則
-3. 專案層級的 ADR 記錄在專案內，不污染公司層級的 ADR 記錄
 
 ### 更新此文件的授權
 
@@ -83,7 +82,7 @@ Agents : 13 個（含管理層）
   E10 QA Engineer                — Phase 5
 
 SDD Cycle per task:
-  Spec → Assign → Execute → Validate → ADR Update → Next task
+  Spec → Assign → Execute → Validate → Next task
 ```
 
 ---
@@ -123,10 +122,9 @@ Human Operator
 ## 系統不可妥協原則（Non-Negotiable）
 
 1. **Domain Lock 是絕對的**：Agent 產出超出其定義 domain = 違規，PM 打回重做，無例外。
-2. **PM 永不產出內容**：PRD、Spec、ADR 是結構文件，PM 從不寫 code、設計或研究內容。
+2. **PM 永不產出內容**：PRD、Spec 是結構文件，PM 從不寫 code、設計或研究內容。
 3. **Phase N+1 不得在 Phase N 全數通過前啟動**：Phase gate 違規會造成下游全面錯誤。
-4. **ADR 是唯一決策依據**：沒有寫進 ADR 的決策 = 沒有做過的決策，Agent 不得違背 ACTIVE ADR。
-5. **驗證是二元的**：每條 AC 只有 PASS 或 FAIL，沒有「差不多通過」。
+4. **驗證是二元的**：每條 AC 只有 PASS 或 FAIL，沒有「差不多通過」。
 
 ---
 
@@ -134,10 +132,11 @@ Human Operator
 
 ```
 .claude/
-├── rules/          ← global.md · domain-lock.md · phase-gates.md · adr-standing.md
-├── agents/         ← ceo.md · pm.md · hr.md · e1~e12 各自的 agent 定義文件
+├── rules/          ← global.md · domain-lock.md · phase-gates.md · security-baseline.md
+├── agents/         ← ceo.md · pm.md · hr.md · e1~e13 · m1~m6 各自的 agent 定義文件
 ├── skills/         ← task_decomposer · spec_writer · validation_engine · 等 PM skills
-└── learning-records/ ← 各 agent 的 Accumulated Learning 檔案
+├── commands/       ← /spec · /validate · /assign · /phase-gate 等 slash commands
+└── directives/     ← CEO 重大架構變更指令歷史
 ```
 
 ---

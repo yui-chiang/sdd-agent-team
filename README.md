@@ -50,11 +50,11 @@ Product Idea
 
 ### SDD 循環 / SDD Cycle
 
-每個任務都遵循相同的 6 步循環：
-Every task follows the same 6-step cycle:
+每個任務都遵循相同的 5 步循環：
+Every task follows the same 5-step cycle:
 
 ```
-Spec → Assign → Execute → Validate → ADR Update → Next Task
+Spec → Assign → Execute → Validate → Next Task
 ```
 
 | 步驟 Step | 執行者 Who | 說明 Description |
@@ -63,7 +63,6 @@ Spec → Assign → Execute → Validate → ADR Update → Next Task
 | Assign | PM | 指派給對應 agent |
 | Execute | Employee Agent | 只輸出自己 domain 的內容 |
 | Validate | PM | 逐條 AC 二元驗證（PASS / FAIL） |
-| ADR Update | PM | 記錄決策到 ADR |
 | Next Task | PM | Gate 通過後開啟下一個 phase |
 
 ### Phase 流程 / Phase Flow
@@ -86,7 +85,7 @@ Spec → Assign → Execute → Validate → ADR Update → Next Task
 | Agent | Code | Level | 職責 Responsibility |
 |-------|------|-------|---------------------|
 | CEO | CEO | L0 | 策略決策、Go/No-Go、CLAUDE.md 更新 |
-| PM | PM | L1 | SDD 協調、Task Spec、Validation、ADR |
+| PM | PM | L1 | SDD 協調、Task Spec、Validation、PRD |
 | HR | HR | L1 | Agent 設計、Onboarding、System Prompt 撰寫 |
 
 ### 產品開發層 Product Engineering Layer（E1–E13）
@@ -104,7 +103,7 @@ Spec → Assign → Execute → Validate → ADR Update → Next Task
 | E9 Operations Monitor | OPS | Cross | Ops Report + Phase gate alerts + Stale-state watchdog |
 | E10 QA Engineer | QA | 5 | `TestPlan` + `BugReport` JSON |
 | E11 DevOps/SRE Engineer | DEVOPS | Cross | `OpsInfraReport` JSON |
-| E12 System Architect | ARCH | Cross | `ArchSpec` JSON + ADR draft |
+| E12 System Architect | ARCH | Cross | `ArchSpec` JSON |
 | E13 AI Engineer | AIE | 4 | `AISpec` JSON（RAG / LLM / Vector DB / Prompt） |
 
 ### 行銷層 Go-to-Market Layer（M1–M6）
@@ -153,13 +152,11 @@ Spec → Assign → Execute → Validate → ADR Update → Next Task
 │   ├── global.md                # 全域原則與輸出格式規範
 │   ├── domain-lock.md           # Domain Lock 主表（每個 agent 的合法/禁止輸出）
 │   ├── phase-gates.md           # 每個 Phase 的 Gate Checklist
-│   ├── adr-standing.md          # 系統預置 ADR-S001 至 ADR-S005
 │   └── security-baseline.md     # SEC-01 至 SEC-09 安全基線
 │
 ├── skills/                      # PM 與各 agent 的可呼叫技能
 │   ├── spec_writer.md           # Task Spec 產出技能
 │   ├── validation_engine.md     # AC 驗證技能
-│   ├── adr_manager.md           # ADR 記錄管理
 │   ├── prd_maintainer.md        # PRD 版本維護
 │   ├── task_decomposer.md       # 任務分解
 │   ├── revision_dispatcher.md   # Revision 派送
@@ -177,7 +174,6 @@ Spec → Assign → Execute → Validate → ADR Update → Next Task
 │   ├── spec.md                  # /spec — 產出 Task Specification
 │   ├── validate.md              # /validate — 驗收 Agent 輸出
 │   ├── assign.md                # /assign — 指派任務
-│   ├── adr-new.md               # /adr-new — 新增 ADR 條目
 │   ├── phase-gate.md            # /phase-gate — 核查 Phase Gate
 │   ├── security-check.md        # /security-check — 安全基線核查
 │   ├── roster.md                # /roster — 查看 Agent 名冊
@@ -187,15 +183,7 @@ Spec → Assign → Execute → Validate → ADR Update → Next Task
 │   ├── CEO_DIRECTIVE_001.md
 │   └── CEO_DIRECTIVE_002.md
 │
-├── learning-records/            # Agent 技能成長記錄
-│   ├── README.md                # 學習記錄系統說明
-│   ├── daily/TEMPLATE.md        # 每日報告模板
-│   └── [agent].md               # 各 agent 長期技能累積檔案
-│
-├── scheduled-tasks/
-│   └── daily-employee-learning.md  # 每日自動學習任務定義
-│
-└── settings.json                # Hooks 設定（ADR 提醒、安全警示、Session 結束清單）
+└── settings.json                # Hooks 設定（安全警示、Session 結束清單）
 
 CLAUDE.md                        # 公司層級章規（系統頂層文件）
 ```
@@ -236,7 +224,6 @@ PM 會自動：
 ```bash
 /spec P1 MA        # 為 E1 Market Analyst 產出 Task Spec
 /validate P1-MA-001  # 驗收 E1 的輸出
-/adr-new           # 記錄決策到 ADR
 /phase-gate        # 核查當前 Phase Gate 狀態
 /roster            # 查看所有 agent 名冊
 ```
@@ -255,7 +242,6 @@ PM 會自動：
 | `/spec [phase] [agent_code]` | 產出 Task Specification | PM skill: spec_writer |
 | `/validate [task_id]` | 逐條 AC 驗收輸出 | PM skill: validation_engine |
 | `/assign [task_id] [agent]` | 指派任務給 agent | PM skill: assign |
-| `/adr-new` | 新增 ADR 條目 | PM skill: adr_manager |
 | `/phase-gate` | 核查 Phase Gate 狀態 | PM skill: phase_gate_checker |
 | `/security-check` | 執行安全基線 SEC-01~09 核查 | PM skill: security_checker |
 | `/roster` | 查看所有 agent 名冊與職責 | PM skill: roster |
@@ -265,9 +251,9 @@ PM 會自動：
 
 ## 不可妥協原則 Non-Negotiable Principles
 
-這 5 條原則在系統初始化時即生效，任何 agent 不得違反：
+這 4 條原則在系統初始化時即生效，任何 agent 不得違反：
 
-These 5 principles are active from system initialization. No agent may violate them:
+These 4 principles are active from system initialization. No agent may violate them:
 
 ### PRINCIPLE-01：Domain Lock 絕對執行
 每個 agent 只能產出其被定義的 domain 內容。超出 domain 的任何輸出由 PM 立即拒絕並重新 assign。
@@ -275,38 +261,19 @@ These 5 principles are active from system initialization. No agent may violate t
 **Every agent may only produce output within its defined domain. Any out-of-domain output is rejected by PM and re-assigned immediately.**
 
 ### PRINCIPLE-02：PM 永不產出內容
-PM 的合法輸出只有四種：Task Specification、Validation Report、PRD update、ADR entry。
+PM 的合法輸出只有三種：Task Specification、Validation Report、PRD update。
 
-**PM's only legal outputs are: Task Specification, Validation Report, PRD update, ADR entry.**
+**PM's only legal outputs are: Task Specification, Validation Report, PRD update.**
 
 ### PRINCIPLE-03：Phase Gate 強制執行
 Phase N+1 的任何 Task Spec 不得在 Phase N 所有任務 APPROVED 之前發出。
 
 **No Phase N+1 Task Spec may be issued before all Phase N tasks are APPROVED.**
 
-### PRINCIPLE-04：ADR 是唯一決策依據
-任何決定若未寫入 ADR = 視為未做決定。Agent 不得依據口頭協議行事。
-
-**Any decision not recorded in the ADR is treated as if it never happened.**
-
-### PRINCIPLE-05：驗證是二元的
+### PRINCIPLE-04：驗證是二元的
 每條 AC 只有 PASS 或 FAIL，沒有「差不多通過」。
 
 **Each Acceptance Criterion is PASS or FAIL. There is no partial pass.**
-
----
-
-## 預置 ADR 系統 Pre-populated Standing ADRs
-
-系統內建 5 條 Standing ADR（`rules/adr-standing.md`），開箱即生效：
-
-| ADR | 決策 Decision |
-|-----|--------------|
-| ADR-S001 | Domain Lock 是絕對的 |
-| ADR-S002 | PM 永不產出內容 |
-| ADR-S003 | Phase gate 強制執行 |
-| ADR-S004 | 安全違規自動 FAIL（hardcoded secrets / 無 input validation / 字串拼接 SQL 等） |
-| ADR-S005 | MVP must-have 功能上限 8 個 |
 
 ---
 
@@ -364,23 +331,12 @@ your-project/
 ```
 
 ### settings.json Hooks
-`.claude/settings.json` 內建三個 Hook，開箱即用：
-- **PostToolUse（Agent）**：每次 agent 執行後提醒新增 ADR
+`.claude/settings.json` 內建兩個 Hook，開箱即用：
 - **PreToolUse（Bash）**：偵測潛在 secret 操作，觸發安全警告
-- **Stop**：Session 結束時顯示 Checklist（ADR / Phase Gate / PRD / Agent 狀態）
+- **Stop**：Session 結束時顯示 Checklist（Phase Gate / PRD / Agent 狀態）
 
 > **注意 Note：** 請勿將 `.claude/settings.local.json` 提交到版本控制，此檔案含有本地路徑設定。
 > Do not commit `.claude/settings.local.json` — it contains local machine paths.
-
----
-
-## 每日學習系統 Daily Learning System
-
-`learning-records/` 目錄包含一套 agent 技能成長記錄系統：
-
-- `daily/TEMPLATE.md` — 每日學習報告模板（複製此模板開始記錄）
-- `[agent].md` — 各 agent 的長期技能累積檔案（由 HR 維護）
-- 可搭配 `scheduled-tasks/daily-employee-learning.md` 設定定時自動執行
 
 ---
 

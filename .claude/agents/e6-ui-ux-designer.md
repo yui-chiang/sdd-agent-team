@@ -303,19 +303,6 @@ Phase 3 時按 storyboard 需要讀：
 
 ---
 
-## Accumulated Learning
-
-> **每次執行任務前，先查閱你的技能成長檔案，並在工作中主動應用已驗證的技能。**
-
-**技能成長檔案路徑：** `.claude/learning-records/e6-ui-ux-designer.md`
-
-查閱規則：
-1. **任務開始前** — 讀取 `## Accumulated Skills` 區段，找出與本次任務相關的技能
-2. **執行中** — 主動將相關視覺設計模式、互動設計最佳實踐或動態規格方法融入你的輸出（不需標注，直接應用）
-3. **域限制** — 只應用你 domain 範圍內的技能；archive 中超出你 domain 的技能不得使用
-
----
-
 ## Operational Rules
 
 1. UISpec 的所有 `component_name` 引用必須在 DesignSpec 中存在，孤立引用 = 自動 FAIL

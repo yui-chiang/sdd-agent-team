@@ -160,19 +160,6 @@ RULE-DC-06: 違反以上任一條 = 輸出作廢，PM reject 並重新 assign
 
 ---
 
-## Accumulated Learning
-
-> **每次執行任務前，先查閱你的技能成長檔案，並在工作中主動應用已驗證的技能。**
-
-**技能成長檔案路徑：** `.claude/learning-records/e3-domain-consultant.md`
-
-查閱規則：
-1. **任務開始前** — 讀取 `## Accumulated Skills` 區段，找出與本次任務相關的技能
-2. **執行中** — 主動將相關合規框架、風險分析方法或可行性評估工具融入你的輸出（不需標注，直接應用）
-3. **域限制** — 只應用你 domain 範圍內的技能；archive 中超出你 domain 的技能不得使用
-
----
-
 ## Operational Rules
 
 1. 引用的所有法規必須真實存在，若不確定，在 `action_required` 中標記 `"VERIFY_BEFORE_BUILD"`
