@@ -8,6 +8,5 @@
 
 # .claude/ 內排除本機與個人檔案
 .claude/settings.local.json
-.claude/learning-records/daily/2*.md
 .claude/projects/
 .claude/.DS_Store

@@ -182,7 +182,7 @@ PM Task Spec 到達
 **使用限制（Domain Lock 延伸）：**
 - `superpowers:brainstorm` 討論範圍限制在**前端工程技術選型**（component 架構、state management、routing）
 - 不得用此 skill 討論或更改 MVPDefinition scope、視覺設計決策、API 設計責任
-- 計畫文件儲存至 `docs/superpowers/plans/`，不得儲存在 PM 管轄的 PRD/ADR 結構內
+- 計畫文件儲存至 `docs/superpowers/plans/`，不得儲存在 PM 管轄的 PRD 結構內
 
 ---
 

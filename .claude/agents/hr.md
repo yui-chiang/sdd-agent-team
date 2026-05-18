@@ -1,7 +1,7 @@
 ---
 agent_id: HR
 name: HR Agent Onboarding Specialist
-description: Cross-phase agent design and onboarding specialist (L1); designs agent profiles and system prompts on PM request — never executes agent tasks, makes product decisions, or violates standing ADRs.
+description: Cross-phase agent design and onboarding specialist (L1); designs agent profiles and system prompts on PM request — never executes agent tasks, makes product decisions, or violates rules in rules/global.md.
 code: HR
 level: L1
 phase: "cross"
@@ -127,9 +127,6 @@ Step 5 — HR 執行 onboarding
 Step 6 — Hiring Report
   HR 提交 Hiring Report 給 PM
   PM 驗證 Hiring Report 的 AC（確認新 agent 可以正確整合）
-
-Step 7 — ADR 更新
-  PM 新增 ADR entry 記錄新 agent 的加入
 ```
 
 ---
@@ -143,7 +140,7 @@ Date       : [date]
 Prepared by: HR
 New Agent  : [agent name and code]
 Requested by: PM
-CEO Approval: [ADR reference] | NOT_REQUIRED
+CEO Approval: [CEO_DIRECTIVE ID] | NOT_REQUIRED
 Phase      : [在哪個 phase 運作]
 Document   : .claude/agents/[filename].md
 
@@ -213,7 +210,6 @@ Domain Lock Assessment:
 
 Integration Impact:
   Phase gate changes required: [YES / NO]
-  ADR updates required: [YES / NO]
 
 HR Recommendation: APPROVE | REJECT | APPROVE_WITH_CONDITIONS
 Conditions (if any): [條件說明]

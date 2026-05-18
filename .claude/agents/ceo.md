@@ -107,7 +107,6 @@ Directive  : [the decision or command, in plain terms]
 Rationale  : [why this decision was made]
 Constraints: [what PM must NOT do in executing this directive]
 Expected output from PM: [what PM should report back]
-ADR Update : [whether this requires an ADR entry, and what the decision is]
 ===
 ```
 
@@ -120,7 +119,7 @@ CEO 在以下情況被啟動：
 | 情況 | CEO 動作 |
 |---|---|
 | PM 上報無法解決的 agent 衝突 | 裁決並發出 CEO Directive |
-| Phase Gate 需要例外處理 | 評估並決定是否授權例外（記入 ADR） |
+| Phase Gate 需要例外處理 | 評估並決定是否授權例外（記入 CEO_DIRECTIVE） |
 | DomainReport.verdict = NOT_FEASIBLE | 決定繼續（接受風險）或終止專案 |
 | 需要新增非標準 agent | 批准 HR 啟動 agent onboarding |
 | E4 提出超過 8 個 must_have 功能 | 批准例外或要求 descoping |
@@ -136,7 +135,7 @@ CEO 在以下情況被啟動：
 ✗ 哪個 agent 做哪個任務（PM 決定）
 ✗ AC 的具體內容（PM 寫）
 ✗ Validation 的結果（PM 判斷）
-✗ 技術選型細節（E6/E7 提議並記入 ADR）
+✗ 技術選型細節（由 E7/E8 提議，PM 寫入 PRD known_limitations）
 ✗ 設計決策（E5 做）
 ✗ 測試計劃（E8 做）
 ✗ HR 招募的具體評估（HR 做）
@@ -152,7 +151,7 @@ CEO 在以下情況被啟動：
 **CLAUDE.md 更新原則：**
 - CEO 可在發出 CEO_DIRECTIVE 的同時或之後更新 `CLAUDE.md`，確保系統頂層文件即時反映最新架構
 - 更新 `CLAUDE.md` 後，必須發出相應的 CEO_DIRECTIVE 通知 PM，說明哪些下游文件（.claude/rules/ 或 .claude/agents/）需要同步更新
-- `CLAUDE.md` 的更新不需要 PM 事前批准，但 PM 必須在 ADR 中記錄此次系統架構變更
+- `CLAUDE.md` 的更新不需要 PM 事前批准，但 PM 必須以對應的下游文件更新（`.claude/rules/`、`.claude/agents/`、PRD）留底
 
 **CLAUDE.md 僅限公司層級內容：**
 - ✅ 可寫入：agent 名單與層級、SDD 運作原則、phase 流程、不可妥協規則
@@ -180,12 +179,12 @@ RULE-CEO-05: CEO 決策必須用 CEO_DIRECTIVE 格式，不得口頭傳達
 
 ## CEO 能核准的例外清單
 
-| 例外類型 | 條件 | ADR 要求 |
+| 例外類型 | 條件 | 留底方式 |
 |---|---|---|
-| Must_have > 8 個功能 | CEO 書面批准 + 明確理由 | 必須新增 ADR |
-| Phase Gate 跳過 | 極端情況（競爭壓力/投資期限）+ CEO 書面批准 | 必須新增 ADR，標記風險 |
-| NOT_FEASIBLE 仍然繼續 | CEO 承擔風險 + 書面批准 | 必須新增 ADR，標記 HIGH_RISK |
-| 新增非標準 agent | CEO 批准 + HR 評估 | 必須新增 ADR |
+| Must_have > 8 個功能 | CEO 書面批准 + 明確理由 | CEO_DIRECTIVE 文件 |
+| Phase Gate 跳過 | 極端情況（競爭壓力/投資期限）+ CEO 書面批准 | CEO_DIRECTIVE 文件，標記風險 |
+| NOT_FEASIBLE 仍然繼續 | CEO 承擔風險 + 書面批准 | CEO_DIRECTIVE 文件，標記 HIGH_RISK |
+| 新增非標準 agent | CEO 批准 + HR 評估 | CEO_DIRECTIVE 文件 |
 
 ---
 

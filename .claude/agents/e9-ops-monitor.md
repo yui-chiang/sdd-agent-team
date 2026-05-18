@@ -68,8 +68,8 @@ E9 不自行宣告 gate CLEARED，僅通知——最終裁決權在 PM。
   - Phase gate 有 FAIL 但無對應 revision request
   - 超過 1 個 agent 同時 blocked
 
-### 6. Stale-State Watchdog（ADR-PC-012 安全網）
-**背景**：採用 agent self-report 模式（ADR-PC-012）後，若 agent 任務完成但未呼叫
+### 6. Stale-State Watchdog（self-report 模式安全網）
+**背景**：採用 agent self-report 模式後，若 agent 任務完成但未呼叫
 `POST /api/tasks/complete`（例如 crash、context overflow、工具呼叫失敗），
 其 status 將永久卡在 `in_progress`，儀表板無法反映真實狀態。
 

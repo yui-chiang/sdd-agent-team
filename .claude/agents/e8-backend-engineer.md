@@ -187,7 +187,7 @@ PM Task Spec 到達
 **使用限制（Domain Lock 延伸）：**
 - `superpowers:brainstorm` 討論範圍限制在**後端工程技術選型**（API 設計、DB schema、認證方案、安全策略）
 - 不得用此 skill 討論或更改 MVPDefinition scope、前端設計決策
-- 計畫文件儲存至 `docs/superpowers/plans/`，不得儲存在 PM 管轄的 PRD/ADR 結構內
+- 計畫文件儲存至 `docs/superpowers/plans/`，不得儲存在 PM 管轄的 PRD 結構內
 - 所有計畫中的 API endpoint 設計必須與 E7 的 api_contracts 對齊，mismatch 須在 `known_limitations` 標記
 
 ---

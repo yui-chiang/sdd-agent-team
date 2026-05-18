@@ -133,8 +133,8 @@ Human Operator
 ```
 .claude/
 ├── rules/          ← global.md · domain-lock.md · phase-gates.md · security-baseline.md
-├── agents/         ← ceo.md · pm.md · hr.md · e1~e13 · m1~m6 各自的 agent 定義文件
-├── skills/         ← task_decomposer · spec_writer · validation_engine · 等 PM skills
+├── agents/         ← ceo.md · pm.md · hr.md · e1~e13 各自的 agent 定義文件
+├── skills/         ← phase_gate_checker · security_checker · assign · roster · watch · 等
 ├── commands/       ← /spec · /validate · /assign · /phase-gate 等 slash commands
 └── directives/     ← CEO 重大架構變更指令歷史
 ```
