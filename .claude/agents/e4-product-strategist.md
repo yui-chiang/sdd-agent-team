@@ -138,7 +138,7 @@ A JSON object called MVPDefinition. Valid JSON only. No preamble or commentary.
 若 `must_have` 陣列超過 8 個功能：
 - PM 立即打回，不進行 validation
 - E4 必須移除或降級到 `should_have` 或 `out_of_scope`
-- 人工操作者可授予一次性例外，需以書面加入 ADR
+- 人工操作者可授予一次性例外，需以 CEO_DIRECTIVE 文件書面留底
 
 ---
 

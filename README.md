@@ -25,10 +25,10 @@
 ## 系統概覽 System Overview
 
 這個系統讓你用 Claude Code 運作一支虛擬的 MVP 開發團隊。
-所有 agents 被嚴格限定在各自的職能範圍（Domain Lock），透過 PM 協調，依序通過 6 個 Phase Gate，最終交付可出貨的 MVP 及行銷套件。
+所有 agents 被嚴格限定在各自的職能範圍（Domain Lock），透過 PM 協調，依序通過 5 個 Phase Gate，最終交付可出貨的 MVP。
 
 This system runs a virtual MVP development team inside Claude Code.
-Every agent is strictly limited to its own domain (Domain Lock), coordinated by the PM through 6 sequential Phase Gates, ultimately delivering a shippable MVP with a go-to-market kit.
+Every agent is strictly limited to its own domain (Domain Lock), coordinated by the PM through 5 sequential Phase Gates, ultimately delivering a shippable MVP.
 
 ```
 Product Idea
@@ -40,8 +40,7 @@ Product Idea
      ├── Phase 2: Definition   → E4 Product Strategist
      ├── Phase 3: Design       → E5 Product Designer → E6 UI/UX Designer
      ├── Phase 4: Engineering  → E7 Frontend + E8 Backend + E13 AI Engineer (parallel)
-     ├── Phase 5: QA           → E10 QA Engineer
-     └── Phase 6: Go-to-Market → M1–M6 Marketing Agents (cycle-based)
+     └── Phase 5: QA           → E10 QA Engineer
 ```
 
 ---
@@ -74,7 +73,6 @@ Spec → Assign → Execute → Validate → Next Task
 | 3 — Design | 串行 Serial | E5 → E6 | DesignSpec → UISpec |
 | 4 — Engineering | 並行 Parallel | E7 + E8 + E13 | Frontend + Backend + AI code |
 | 5 — QA | 串行 Serial | E10 | TestPlan + BugReport + ship_recommendation |
-| 6 — Go-to-Market | 14 天循環 14-day cycle | M1–M6 | MarketingStrategy + ContentBatch + AdCampaignSpec |
 
 ---
 
@@ -106,24 +104,13 @@ Spec → Assign → Execute → Validate → Next Task
 | E12 System Architect | ARCH | Cross | `ArchSpec` JSON |
 | E13 AI Engineer | AIE | 4 | `AISpec` JSON（RAG / LLM / Vector DB / Prompt） |
 
-### 行銷層 Go-to-Market Layer（M1–M6）
-
-| Agent | Code | 合法輸出 Output |
-|-------|------|-----------------|
-| M1 Marketing Strategist | MS | `MarketingStrategy` JSON |
-| M2 Content Producer | CP | `ContentBatch` JSON |
-| M3 Distribution & Partnerships | DP | `DistributionPlan` JSON |
-| M4 Paid Acquisition | PA | `AdCampaignSpec` JSON |
-| M5 Community & Engagement | CE | `EngagementProtocol` JSON |
-| M6 Growth Analyst | GA | `GrowthReport` JSON |
-
 ---
 
 ## 目錄結構 Directory Structure
 
 ```
 .claude/
-├── agents/                      # 24 個 agent 定義文件
+├── agents/                      # 17 個 agent 定義文件
 │   ├── ceo.md                   # L0：策略決策層
 │   ├── pm.md                    # L1：SDD 協調層
 │   ├── hr.md                    # L1：Agent 設計層
@@ -140,12 +127,6 @@ Spec → Assign → Execute → Validate → Next Task
 │   ├── e11-devops-sre.md        # Cross-phase：基礎設施
 │   ├── e12-system-architect.md  # Cross-phase：系統架構
 │   ├── e13-ai-engineer.md       # Phase 4：AI 工程
-│   ├── m1-marketing-strategist.md
-│   ├── m2-content-producer.md
-│   ├── m3-distribution-partnerships.md
-│   ├── m4-paid-acquisition.md
-│   ├── m5-community-engagement.md
-│   ├── m6-growth-analyst.md
 │   └── designer.md              # 選配：UI prototype 設計師
 │
 ├── rules/                       # 全系統強制規則
@@ -155,19 +136,18 @@ Spec → Assign → Execute → Validate → Next Task
 │   └── security-baseline.md     # SEC-01 至 SEC-09 安全基線
 │
 ├── skills/                      # PM 與各 agent 的可呼叫技能
-│   ├── spec_writer.md           # Task Spec 產出技能
-│   ├── validation_engine.md     # AC 驗證技能
-│   ├── prd_maintainer.md        # PRD 版本維護
-│   ├── task_decomposer.md       # 任務分解
-│   ├── revision_dispatcher.md   # Revision 派送
 │   ├── phase_gate_checker.md    # Phase Gate 核查
 │   ├── security_checker.md      # 安全基線核查
 │   ├── roster.md                # Agent 名冊查詢
 │   ├── assign.md                # 任務指派
 │   ├── watch.md                 # Session 監控
 │   ├── phase.md                 # Phase 狀態查詢
+│   ├── codex-executor.md        # 委派微任務給 OpenAI Codex
+│   ├── gemini-executor.md       # 委派微任務給 Google Gemini
+│   ├── ops-quick-commands.md    # E9 常用指令
 │   ├── e4-skills/               # E4 專屬：MVP 策略方法論（9 個技能）
 │   ├── e6-skills/               # E6 專屬：UI 設計模式（3 個技能）
+│   ├── superpowers/             # E7/E8 專屬：brainstorm / write-plan / execute-plan
 │   └── hr-onboarding.md         # HR Agent 新增流程
 │
 ├── commands/                    # Slash 指令定義
@@ -180,8 +160,7 @@ Spec → Assign → Execute → Validate → Next Task
 │   └── watch.md                 # /watch — 監控 Session 狀態
 │
 ├── directives/                  # CEO 指令歷史（供參考）
-│   ├── CEO_DIRECTIVE_001.md
-│   └── CEO_DIRECTIVE_002.md
+│   └── CEO_DIRECTIVE_001.md
 │
 └── settings.json                # Hooks 設定（安全警示、Session 結束清單）
 
@@ -239,8 +218,8 @@ PM 會自動：
 
 | 指令 Command | 說明 Description | 執行者 Executor |
 |-------------|-----------------|-----------------|
-| `/spec [phase] [agent_code]` | 產出 Task Specification | PM skill: spec_writer |
-| `/validate [task_id]` | 逐條 AC 驗收輸出 | PM skill: validation_engine |
+| `/spec [phase] [agent_code]` | 產出 Task Specification | PM（依 agents/pm.md 內定義） |
+| `/validate [task_id]` | 逐條 AC 驗收輸出 | PM（依 agents/pm.md 內定義） |
 | `/assign [task_id] [agent]` | 指派任務給 agent | PM skill: assign |
 | `/phase-gate` | 核查 Phase Gate 狀態 | PM skill: phase_gate_checker |
 | `/security-check` | 執行安全基線 SEC-01~09 核查 | PM skill: security_checker |
@@ -345,7 +324,7 @@ your-project/
 歡迎提交 Issue 或 PR，特別是：
 - 新 agent 定義
 - 改良的 skill 實作
-- 新 Phase 6+ 擴充（如 Phase 7: Analytics, Phase 8: Fundraising）
+- 新 Phase 擴充
 - Bug fix 或邊界案例補丁
 
 ---

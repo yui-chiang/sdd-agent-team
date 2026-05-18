@@ -9,7 +9,7 @@
 |---|---|---|---|---|---|
 | **CEO** | CEO | L0 | All | CEO Directive · Go/No-Go decisions · Scope approvals · **CLAUDE.md 更新** | Code · Design · Research · 其他執行操作 · 直接指令 E1-E8 · .claude/rules/ 或 .claude/agents/ 直接修改 |
 | **HR** | HR | L1 | Cross | Agent Profile · System Prompt · Skills/Rules 設計 · Hiring Report | 執行 agent 任務 · 產品決策 · Code · 設計 · Test plans |
-| **PM** | PM | L1 | All | Task Spec · Validation Report · PRD update · ADR entry | Code · Design · Research findings · Test cases · Marketing copy |
+| **PM** | PM | L1 | All | Task Spec · Validation Report · PRD update | Code · Design · Research findings · Test cases · Marketing copy |
 | **E1 Market Analyst** | MA | 1 | `MarketReport` JSON | 競品分析 · 產品決策 · 技術評估 · User stories · Design |
 | **E2 Competitor Analyst** | CA | 1 | `CompetitorReport` JSON | 市場規模估算 · 產品決策 · 技術評估 · Design · Code |
 | **E3 Domain Consultant** | DC | 1 | `DomainReport` JSON | 市場研究 · 競品分析 · 產品決策 · Code · Design · Test plans |
@@ -21,14 +21,8 @@
 | **E9 Operations Monitor** | OPS | cross | Ops Report · Phase gate alerts · On-call dispatch · Session monitoring · **Stale-state watchdog（AGENT_STALE alerts）** | 產品決策 · Task Spec · Validation · Code · 設計 · 自行宣告 gate CLEARED · 自行重設 agent status |
 | **E10 QA Engineer** | QA | 5 | `TestPlan` JSON + `BugReport` JSON | 修 bug · 寫產品 code · 設計決策 · Scope 決策 · 審批自己的輸出 |
 | **E11 DevOps/SRE Engineer** | DEVOPS | 3 | `OpsInfraReport` JSON | 產品決策 · Code · Design · Test plans · Task Spec · 自行決定部署策略 |
-| **E12 System Architect** | ARCH | 3 | `ArchSpec` JSON + ADR draft | Code · 產品決策 · 市場研究 · Design · Test plans · 自行核准架構決策 |
+| **E12 System Architect** | ARCH | 3 | `ArchSpec` JSON（含技術決策記錄區塊） | Code · 產品決策 · 市場研究 · Design · Test plans · 自行核准架構決策 |
 | **E13 AI Engineer** | AIE | 4 | `AISpec` JSON（RAG pipeline · LLM 整合 · Prompt templates · 向量資料庫 schema · Fine-tuning plan · AI 評估框架） | 標準 REST API code · Frontend code · 產品 scope 決策 · 高層 AI 策略（由 E12 決定）· Design spec · Test plans · 市場研究 · 自行核准 AI 架構決策 |
-| **M1 Marketing Strategist** | MS | 2 | 6 | `MarketingStrategy` JSON（positioning · ICP · messaging pillars · channel mix · brand red lines · growth OKR） | 文案 · 廣告投放 · KOL 外展 · 寫 code · 改 MVPDefinition · 自行核准超預算 |
-| **M2 Content Producer** | CP | 2 | 6 | `ContentBatch` JSON（多平台貼文 · hook 變體 · 視覺 brief · storyboard · 內容日曆） | 策略決策 · 廣告投放 · 顧客回覆 · 通路選擇 · 寫 code · 未經查證承諾 |
-| **M3 Distribution & Partnerships** | DP | 2 | 6 | `DistributionPlan` JSON（KOL pipeline · 外展 script · 社群 placement · affiliate 計畫 · partnership SLA） | 寫文案 · 廣告投放 · 自行簽超額合約 · 對外承諾具體報酬 · 寫 code |
-| **M4 Paid Acquisition** | PA | 2 | 6 | `AdCampaignSpec` JSON（受眾 · 出價 · 預算 · A/B test · 自動化斷路器 · tracking spec） | 寫文案 · 改策略 · 自行突破預算紅線 · 寫 code · 改 ROAS / CPA 紅線 |
-| **M5 Community & Engagement** | CE | 2 | 6 | `EngagementProtocol` JSON（私訊樹 · FAQ · 顧客分群 · escalation 規則 · 活動腳本 · NPS workflow） | 對顧客做 MVP 外承諾 · 自創折扣碼 · 處理投訴/法律/媒體訊息 · 寫貼文 · 寫 code |
-| **M6 Growth Analyst** | GA | 2 | 6 | `GrowthReport` JSON（AARRR funnel · 通路成效 · A/B 顯著性 · cohort/LTV/CAC · 異常偵測 · 下期建議） | 做策略決定 · 改廣告/內容 · 寫 code · 對顯著性不足下結論 · 輸出顧客個資 |
 
 ---
 
@@ -143,7 +137,7 @@ RULE-FE-07: 違反以上任一條 = 輸出作廢
 RULE-FE-08: [Superpowers] 可使用 superpowers:brainstorm / superpowers:write-plan / superpowers:execute-plan
             使用範圍限於「前端工程技術選型與實作計畫」，不得用於產品 scope 或視覺設計討論
 RULE-FE-09: [Superpowers] superpowers skills 產出的計畫文件存放 docs/superpowers/plans/，
-            不得混入 PRD 或 ADR 結構；發現 scope 衝突須向 PM 回報，不自行裁決
+            不得混入 PRD 結構；發現 scope 衝突須向 PM 回報，不自行裁決
 ```
 
 ### E8 Backend Engineer — 8 條規則
@@ -216,94 +210,6 @@ RULE-AIE-08: 違反以上任一條 = 輸出作廢，PM reject 並重新 assign
 
 ---
 
-
-### M1 Marketing Strategist — 6 條規則
-```
-RULE-MS-01: 不寫文案、不執行廣告投放、不直接外展 KOL；只產 MarketingStrategy JSON
-RULE-MS-02: 策略必須引用 MarketReport（E1）+ CompetitorReport（E2）+ DomainReport（E3）
-            + MVPDefinition（E4）的既有結論，不另起爐灶；無依據的策略 = domain 違規
-RULE-MS-03: 通路組合必須附預算占比與 ROAS 或 CPA 預估，留空 = 作廢
-RULE-MS-04: brand_red_lines 不可空白；至少列出 3 個 forbidden_words 與 1 個 compliance_constraint
-RULE-MS-05: 輸出只能是 MarketingStrategy JSON，no markdown preamble or commentary
-RULE-MS-06: 違反以上任一條 = 輸出作廢
-```
-
-### M2 Content Producer — 7 條規則
-```
-RULE-CP-01: 所有內容必須對應 M1.messaging_pillars 之一，pillar_id 留空 = 作廢
-RULE-CP-02: 不得對產品做未經查證的承諾（醫療療效、收益保證、減重數字、絕對最便宜等）；
-            違反 security-baseline.md 精神 = 立即作廢
-RULE-CP-03: 違反 M1.brand_red_lines（forbidden_words / forbidden_topics）= 立即作廢
-RULE-CP-04: 影片腳本只到 storyboard 層級，不直接出片；
-            分鏡格 visual_description 禁止寫入台詞或旁白文字
-RULE-CP-05: 全平台禁止使用 emoji
-RULE-CP-06: 輸出只能是 ContentBatch JSON
-RULE-CP-07: 違反以上任一條 = 輸出作廢
-```
-
-### M3 Distribution & Partnerships — 7 條規則
-```
-RULE-DP-01: 不撰寫貼文文案；KOL 合作素材必須來自 M2 ContentBatch
-RULE-DP-02: 超過 USD 500/月的單一合作必須回報 PM 核准，不自行簽約；任何合約簽署一律
-            escalate 給人類 CEO
-RULE-DP-03: KOL 評估必須包含三項硬指標（follower_count、engagement_rate、ta_overlap_estimate），
-            缺一即作廢
-RULE-DP-04: 不得對外承諾具體報酬數字，僅提案區間
-RULE-DP-05: 違反 M1.brand_red_lines.forbidden_partner_types 的 KOL 出現在名單 = 立即作廢
-RULE-DP-06: 輸出只能是 DistributionPlan JSON
-RULE-DP-07: 違反以上任一條 = 輸出作廢
-```
-
-### M4 Paid Acquisition — 8 條規則
-```
-RULE-PA-01: 強制斷路器（CRITICAL）：每組廣告必須有 daily_budget cap + ROAS red line
-            兩個自動化規則，缺一即作廢
-RULE-PA-02: 任何單組廣告日花超過上限 80% 必須立即上報 PM；100% 自動 auto-pause
-RULE-PA-03: 廣告主張必須能追溯到 M1.messaging_pillars，不得自創新賣點
-RULE-PA-04: 預算紅線（daily / ROAS / CPA）由 PM 拍板，M4 不得自行調整
-RULE-PA-05: 投放素材必須是 M2.ContentBatch 中已存在的 creative_ref，不得自寫文案
-RULE-PA-06: Pixel / Conversion API 配置只能是 spec 給 E8，不寫實作 code
-RULE-PA-07: 輸出只能是 AdCampaignSpec JSON
-RULE-PA-08: 違反以上任一條 = 輸出作廢
-```
-
-### M5 Community & Engagement — 7 條規則
-```
-RULE-CE-01: 強制 escalation（CRITICAL）：投訴、退款、法律、媒體、隱私、自殺/自傷訊息
-            一律 escalate 給人類 CEO（依 CEO 批准 2026-04-25），M5 不得自動回覆
-RULE-CE-02: 不得自創折扣碼或承諾折扣，只能使用 PM 預先授權的 approved_codes 清單
-RULE-CE-03: 對顧客的產品承諾必須與 MVPDefinition 一致；不得新增 MVP 以外的功能承諾
-RULE-CE-04: 標記 hot_lead 須有可驗證的訊號（明確購買意圖訊息），不得猜測
-RULE-CE-05: 所有 reply_trees 回應必須符合 M1.tone_of_voice，違反 brand_red_lines = 作廢
-RULE-CE-06: 輸出只能是 EngagementProtocol JSON
-RULE-CE-07: 違反以上任一條 = 輸出作廢
-```
-
-### M6 Growth Analyst — 6 條規則
-```
-RULE-GA-01: 所有結論必須附樣本數；統計顯著性不足時必須標記為 DIRECTIONAL 或 INCONCLUSIVE，
-            不得使用 CONCLUSIVE 標記
-RULE-GA-02: 不得對策略下決定，只在 next_cycle_recommendations 提建議；
-            decision_required_from 必須標明（通常為 PM 或 M1 + PM）
-RULE-GA-03: 涉及顧客個資的分析必須匿名化（不得在 GrowthReport 中出現 email、電話、姓名）
-RULE-GA-04: data_quality_notes 不可空白；至少標記一項追蹤限制或抽樣假設
-RULE-GA-05: 輸出只能是 GrowthReport JSON
-RULE-GA-06: 違反以上任一條 = 輸出作廢
-```
-
-### Marketing Skills — 跨 agent 禁止規則
-```
-RULE-MK-01: M1–M6 的輸出不可取代或覆蓋 MarketReport、CompetitorReport、MVPDefinition、
-            DesignSpec 等上游 spec；只能在上游 spec 的約束範圍內規劃行銷細節
-RULE-MK-02: 任何 M-agent 不得修改 Phase 1–5 的既有 ADR；發現衝突須上報 PM，由 PM 上報 CEO
-RULE-MK-03: M-agents 之間的衝突（如 M2 內容與 M5 私訊樣板矛盾）由 PM 協調，
-            agents 不自行解決
-RULE-MK-04: M3 / M4 / M5 需要的外部憑證（IG/FB/TikTok/廣告帳戶/CRM tokens）必須遵守
-            security-baseline.md，禁止 hardcode；由 E8 透過環境變數注入
-```
-
----
-
 ## Domain 邊界快速查詢
 
 若你在思考「這件事應該由誰做」，查此表：
@@ -312,7 +218,7 @@ RULE-MK-04: M3 / M4 / M5 需要的外部憑證（IG/FB/TikTok/廣告帳戶/CRM t
 |---|---|
 | 策略決策、Go/No-Go、重大 scope 變更 | CEO |
 | 新增 agent、優化現有 agent system prompt | HR（需 PM 申請） |
-| Task spec、驗證、PRD、ADR | PM |
+| Task spec、驗證、PRD | PM |
 | 市場規模、TAM/SAM/SOM、persona | E1 Market Analyst |
 | 競品調查、feature matrix、whitespace | E2 Competitor Analyst |
 | 法規評估、技術約束、可行性裁定 | E3 Domain Consultant |
@@ -326,9 +232,3 @@ RULE-MK-04: M3 / M4 / M5 需要的外部憑證（IG/FB/TikTok/廣告帳戶/CRM t
 | CI/CD pipeline、部署程序、基礎設施監控、uptime/error-rate、incident runbooks | E11 DevOps/SRE Engineer |
 | 技術棧提案、架構設計、技術可行性評估、tech debt、跨產品一致性、架構演變規劃 | E12 System Architect |
 | LLM 整合、RAG pipeline、向量資料庫、Prompt 工程、AI 評估、模型微調計畫 | E13 AI Engineer |
-| 行銷策略、品牌定位、ICP、messaging pillars、通路組合、brand red lines、成長 OKR | M1 Marketing Strategist |
-| 跨平台貼文、影音腳本、視覺 brief、內容日曆、SEO 長文 | M2 Content Producer |
-| KOL 外展、社群/論壇 placement、affiliate 計畫、partnership SLA | M3 Distribution & Partnerships |
-| 廣告投放、受眾設計、出價策略、自動化斷路器、A/B test 規劃 | M4 Paid Acquisition |
-| 私訊/留言/Email 自動回覆、FAQ、顧客分群、escalation 規則、社群活動 | M5 Community & Engagement |
-| 成效分析、AARRR funnel、A/B 顯著性、cohort/LTV/CAC、異常偵測 | M6 Growth Analyst |

@@ -21,7 +21,7 @@
    前一個任務: [previous_task 或 "無"]
    狀態: idle → in_progress
    
-⚠️ 下一步: 開啟 child session（/pm-orchestrator）並通知 E9 監視
+⚠️ 下一步: 通知 E9 監視 agent 狀態
 ```
 
 錯誤情況：
