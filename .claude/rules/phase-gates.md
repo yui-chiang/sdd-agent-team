@@ -17,6 +17,17 @@
 **若 DomainReport 有 blockers**：
 PM 必須將 `mvp_feasibility_verdict.blockers` 中的每一項加入 PRD 的 open questions，並標記 `blocking: true`，在 Phase 2 開始前須解決。
 
+**Blocker 解決路徑（依類型分派）**
+
+| Blocker 類型 | 責任人 | 動作 |
+|---|---|---|
+| 法規 / 合規 / 政府許可 | 人工操作者 | CEO 決定是否聘請外部顧問或調整 scope；PM 等待 CEO 指令 |
+| 技術可行性（替代方案存在） | PM → E12 | PM 發 spec 給 E12，E12 評估替代方案並回傳可行性結論 |
+| 技術可行性（無替代方案） | 人工操作者 | CEO 決定縮減 scope 或中止，PM 不自行裁決 |
+| 資料隱私 / 安全合規 | PM → E8 → 人工操作者 | E8 評估技術緩解方案，提交 PM，CEO 批准後繼續 |
+
+所有 blocking 項目解決後，E3 更新 DomainReport（blockers 狀態更新），PM 重新 validate，gate 方可通過。
+
 ---
 
 ## PHASE 2 GATE — Product Definition 完成條件
@@ -59,6 +70,14 @@ PM 必須將 `mvp_feasibility_verdict.blockers` 中的每一項加入 PRD 的 op
 > Phase 4 為三方並行：E7（前端）、E8（後端）、E13（AI 工程，若產品含 AI 功能）
 > 若產品不含 AI 功能，P4-AIE-001 可標記 NOT_APPLICABLE，無需等待
 
+**API Contracts 同步里程碑（並行開始後，最終 delivery 前的中間檢查點）**
+
+1. E7 完成 api_contracts 草稿（無需完成完整前端實作）後通知 PM
+2. PM 發 sync notice 給 E8，E8 確認每個 endpoint 的 request/response shape 可接受
+3. 若有 mismatch：E7 與 E8 各自在 known_limitations 標記，PM 裁決修改方向後發 revision spec
+4. PM 宣告「API contracts frozen」，E7/E8 繼續各自完整實作
+5. 此里程碑必須在兩者提交最終 delivery 前完成，不可跳過
+
 ```
 [ ] P4-FE-001  Frontend delivery（E7）已交付並通過 PM Validation（OVERALL: PASS）
 [ ] P4-BE-001  Backend delivery（E8）已交付並通過 PM Validation（OVERALL: PASS）
@@ -87,26 +106,39 @@ PM 必須將 `mvp_feasibility_verdict.blockers` 中的每一項加入 PRD 的 op
 ```
 [ ] P5-QA-001  TestPlan 已交付並通過 PM Validation
 [ ] P5-QA-002  BugReport 已交付並通過 PM Validation
-[ ] ship_criteria_check.all_critical_resolved = true
-    （有任何 CRITICAL bug 未解決 = 強制 DO_NOT_SHIP）
+[ ] 無 CRITICAL bug 未解決（有任何 CRITICAL bug 未解決 = 強制 DO_NOT_SHIP）
 [ ] ship_criteria_check.security_tests_passed = true
 [ ] ship_criteria_check.core_user_flows_complete = true
 [ ] ship_criteria_check.accessibility_baseline = true
-[ ] 所有 bug.blocker=true 的 bug 已 assign 並解決
+[ ] 所有 HIGH bug 已解決，或 ship_recommendation = SHIP_WITH_FIXES 且每個 HIGH bug 有 fix plan 並已 assign
 [ ] ship_recommendation = SHIP 或 SHIP_WITH_FIXES（PM 最終裁決）
 [ ] PRD v1.0 最終版本已發布
 ```
+
+**Phase 5 迭代路徑**
+
+DO_NOT_SHIP → 修復 → 重測：
+1. PM 依 BugReport 為每個 blocker bug 發修復 Task Spec（P5-FE/BE/UX-fix-[seq]）
+2. 對應 engineer 修復並回報完成
+3. PM 發下一輪 QA Task Spec（P5-QA-003 起遞增），E10 執行回歸測試並產出新 BugReport
+4. 新 BugReport 通過 PM Validation 後，重新進入本 gate checklist 判斷
+
+SHIP_WITH_FIXES 條件：
+- HIGH bugs 不需全部解決，但每個 HIGH bug 必須有 assignee 確認與預計修復日期
+- E10 在 BugReport 中標記該 bug 的 `scope_isolated = true`（不影響 critical path）
+- PM 在 PRD v1.0 的 known_limitations 中列出所有 SHIP_WITH_FIXES 的 HIGH bugs
 
 ---
 
 ## Phase Gate 違規處理
 
 ```
-情況                              → 處理方式
-─────────────────────────────────────────────────
-PM 發出 Phase N+1 spec            → 立即撤回 spec，補完 Phase N gate
-  而 Phase N 未清
-E7/E8 並行中一方 FAIL             → 等待 FAIL 方修改完成，兩者皆 APPROVED 才過 gate
-DomainReport 有 NOT_FEASIBLE      → 上報人工操作者，系統暫停
-Phase 1 三個 reports 有衝突        → PM 上報人工操作者，不自行裁決
+情況                                   → 處理方式
+──────────────────────────────────────────────────────────
+PM 發出 Phase N+1 spec 而 Phase N 未清  → 立即撤回 spec，補完 Phase N gate
+E7/E8 並行中一方 FAIL                  → 等待 FAIL 方修改完成，兩者皆 APPROVED 才過 gate
+DomainReport 有 blockers               → 依「Blocker 解決路徑」表處理（見 Phase 1 GATE）
+DomainReport 為 NOT_FEASIBLE           → 上報人工操作者，PM 等待 CEO 指令，系統暫停
+Phase 1 三個 reports 有衝突             → PM 上報人工操作者，不自行裁決
+Phase 5 為 DO_NOT_SHIP                 → 依「Phase 5 迭代路徑」執行修復與重測流程
 ```
