@@ -130,6 +130,15 @@ codex exec "在 utils/ 目錄下建立 formatDate.ts，
 
 ---
 
+## 硬規則（違反即視同 RULE-PM-01 違規）
+
+1. **禁止用於 must_have 功能**：MVPDefinition.must_have 清單中的任何功能，一律開立正式 E7/E8 Task Spec，不得以行數少為由使用此 skill。
+2. **禁止累積拆分**：同一功能不得被拆分成多個微任務分批執行。合計超過 50 行或影響超過 2 個檔案，升級為正式 Task Spec。
+3. **必須有 audit reference**：每次呼叫必須對應一個正式 task_id，或在 session 記錄中明確標注「輔助工具，非交付物」。
+4. **Validation Report 標注義務**：若某次 PM Validation Report 中包含 codex 輸出，必須標注 `codex_assisted: true` 及呼叫次數。
+
+---
+
 ## 輸出驗證（PM 責任）
 
 Codex 執行後，PM 必須對輸出進行 Validation。驗證檢查清單：
