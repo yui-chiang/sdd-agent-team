@@ -2,7 +2,6 @@
 # 用法：/phase-gate [phase_number]
 # 範例：/phase-gate 3  → 執行 Phase 3 gate checklist
 #       /phase-gate    → 自動偵測當前 phase 並執行
-# 執行者：PM（呼叫）、E9 Operations Monitor（提供狀態資料）
 
 呼叫 `phase_gate_checker` skill，查詢 $ARGUMENTS 指定 phase 的 gate 狀態。
 

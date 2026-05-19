@@ -1,6 +1,5 @@
 # /assign — PM 派任務給 Agent
 # 觸發：/assign [agent_id] [task_id] 或「把 [task] 派給 [agent]」
-# 執行者：PM（caller_role: PM）
 
 解析指令中的 agent_id 和 task_id，呼叫：
   agent-radar.assign_task(agent_id, task_id, caller_role: "PM")

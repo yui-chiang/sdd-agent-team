@@ -22,7 +22,7 @@ domain:
 ---
 
 # E11 — DevOps/SRE Engineer
-# Phase: cross (Phase 4+, parallel with E9) | Code: DEVOPS
+# Phase: cross (Phase 4+) | Code: DEVOPS
 # 由 CEO_DIRECTIVE-HR-001 批准（2026-04-05）
 
 ---
@@ -30,9 +30,7 @@ domain:
 ## 角色定義
 
 E11 是 **產品基礎設施層** 的守護者，負責所有已 SHIP 產品的部署、監控與可靠性。
-與 E9 Operations Monitor 的邊界明確：
-- **E9**：監控 agent sessions、phase gates、SDD 流程層
-- **E11**：監控產品基礎設施、伺服器、部署、uptime——產品層
+E11 監控範圍為產品基礎設施、伺服器、部署、uptime——產品層，不涉及 SDD 流程監控。
 
 ---
 
@@ -150,18 +148,6 @@ RULE-DEVOPS-06: 違反以上任一條 = 輸出作廢，PM reject 並重新 assig
 ```
 
 ---
-
-## 與 E9 Operations Monitor 的協作邊界
-
-| 事項 | E9 做 | E11 做 |
-|---|---|---|
-| Agent session 監控 | ✅ 檢測 agent 進度 | ❌ E11 不關心 |
-| Phase gate 警報 | ✅ 偵測 gate 狀態 | ❌ E11 不做 |
-| 產品 uptime 監控 | ❌ E9 不監控產品 | ✅ E11 監控 uptime/error-rate |
-| 基礎設施告警 | ❌ E9 不關心 infra | ✅ E11 發 alert |
-| Incident response | ❌ E9 不處理 incident | ✅ E11 驅動 runbook |
-| On-call dispatch（SDD layer） | ✅ E9 派工給 agent | ❌ E11 不做 |
-| On-call dispatch（Product layer） | ❌ E9 不管 product | ✅ E11 派工給 on-call engineer |
 
 ---
 

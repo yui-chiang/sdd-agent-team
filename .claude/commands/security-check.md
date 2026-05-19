@@ -3,7 +3,6 @@
 # 範例：/security-check E8   → 只核查 Backend
 #       /security-check all  → 核查 E7+E8+E13
 #       /security-check      → 預設核查所有工程輸出
-# 執行者：PM
 
 呼叫 `security_checker` skill，依 $ARGUMENTS 指定對象執行 security-baseline.md 的 9 項安全核查。
 

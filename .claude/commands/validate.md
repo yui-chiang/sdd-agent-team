@@ -1,6 +1,5 @@
 # /validate — PM 驗收 Agent 輸出
 # 用法：/validate [task_id]
-# 執行者：PM
 
 PM 對 $ARGUMENTS 指定的 task_id 執行逐條 AC 驗證。
 詳細格式見 `.claude/agents/pm.md` 的「Output Formats > Validation Report」段。

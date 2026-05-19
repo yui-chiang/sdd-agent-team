@@ -8,7 +8,7 @@ phase: 4
 
 # superpowers:brainstorm
 # 授權使用者：E7 Frontend Engineer、E8 Backend Engineer（僅限工程層 scope）
-# 禁止使用者：所有其他 agents（PM、E1–E6、E9–E12、HR、CEO）
+# 禁止使用者：所有其他 agents（PM、E1–E6、E10–E13、HR、CEO）
 
 ---
 

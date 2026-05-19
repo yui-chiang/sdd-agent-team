@@ -1,6 +1,5 @@
 # /roster — 查詢所有 Agent 狀態
 # 用法：/roster
-# 執行者：E9 Operations Monitor
 
 呼叫 `roster` skill，以表格格式呈現所有 agent 的當前狀態。
 
@@ -26,5 +25,4 @@ STATUS      AGENT   NAME                 CURRENT TASK
 ```
 
 遵守規則：
-- E9 只報告狀態，不自行 assign 任務
 - blocked agents 必須顯示 notes 原因
