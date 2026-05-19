@@ -2,7 +2,6 @@
 # 用法：/spec [phase] [agent_code]
 # 範例：/spec P4 FE  → 產出 P4-FE-001 的 Task Spec
 #       /spec P1 MA  → 產出 P1-MA-001 的 Task Spec
-# 執行者：PM
 
 依 $ARGUMENTS 指定的 Phase 和 Agent Code，PM 產出完整 Task Specification。
 詳細格式與工作流見 `.claude/agents/pm.md` 的「Output Formats > Task Specification」段。

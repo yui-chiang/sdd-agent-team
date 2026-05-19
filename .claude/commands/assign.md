@@ -2,7 +2,6 @@
 # 用法：/assign [agent_id] [task_id]
 # 範例：/assign E7 P4-FE-001
 #       /assign E10 P5-QA-001
-# 執行者：PM
 
 呼叫 `assign` skill，解析 $ARGUMENTS 並執行任務指派。
 
@@ -20,8 +19,6 @@
    Task: [task_id]
    前一個任務: [previous_task 或 "無"]
    狀態: idle → in_progress
-   
-⚠️ 下一步: 通知 E9 監視 agent 狀態
 ```
 
 錯誤情況：
@@ -33,4 +30,4 @@
 
 遵守規則：
 - RULE-PM-06：Phase N 未全 APPROVED 不得 assign Phase N+1 任務
-- 只有 PM（caller_role: PM）可以 assign，E9 可通知但不可 assign
+- 只有 PM（caller_role: PM）可以 assign
