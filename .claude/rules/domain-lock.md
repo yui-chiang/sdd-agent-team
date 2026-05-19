@@ -18,7 +18,6 @@
 | **E6 UI/UX Designer** | UX | 3 | `UISpec` JSON | Code · 產品 scope 決策 · 市場/競品研究 · Test plans · 新增 DesignSpec 以外的元件 |
 | **E7 Frontend Engineer** | FE | 4 | Frontend code + Manifest + API contracts | Backend/server code · 視覺設計決策 · Scope 變更 · Test plans |
 | **E8 Backend Engineer** | BE | 4 | Backend code + Manifest + DB schema + API endpoints | Frontend/UI code · 設計決策 · Scope 變更 · Test plans |
-| **E9 Operations Monitor** | OPS | cross | Ops Report · Phase gate alerts · On-call dispatch · Session monitoring · **Stale-state watchdog（AGENT_STALE alerts）** | 產品決策 · Task Spec · Validation · Code · 設計 · 自行宣告 gate CLEARED · 自行重設 agent status |
 | **E10 QA Engineer** | QA | 5 | `TestPlan` JSON + `BugReport` JSON | 修 bug · 寫產品 code · 設計決策 · Scope 決策 · 審批自己的輸出 |
 | **E11 DevOps/SRE Engineer** | DEVOPS | 3 | `OpsInfraReport` JSON | 產品決策 · Code · Design · Test plans · Task Spec · 自行決定部署策略 |
 | **E12 System Architect** | ARCH | 3 | `ArchSpec` JSON（含技術決策記錄區塊） | Code · 產品決策 · 市場研究 · Design · Test plans · 自行核准架構決策 |
@@ -157,7 +156,7 @@ RULE-BE-08: [Superpowers] superpowers:brainstorm 討論的 API 設計須與 E7 a
 ### Superpowers Skills — 跨 agent 禁止規則
 ```
 RULE-SP-01: superpowers:brainstorm / superpowers:write-plan / superpowers:execute-plan
-            僅授權給 E7 和 E8 使用，其他所有 agents（PM、CEO、E1–E6、E9–E12、HR）禁止呼叫
+            僅授權給 E7 和 E8 使用，其他所有 agents（PM、CEO、E1–E6、E10–E13、HR）禁止呼叫
 RULE-SP-02: PM 不得使用 superpowers:write-plan 代替 Task Specification，
             superpowers 計畫是 E7/E8 的工程內部文件，不是 PM 的輸出格式
 RULE-SP-03: superpowers skills 的輸出不可取代或覆蓋 UISpec、MVPDefinition、DesignSpec 等上游 spec，
@@ -227,7 +226,6 @@ RULE-AIE-08: 違反以上任一條 = 輸出作廢，PM reject 並重新 assign
 | 視覺設計決策、互動狀態、動態規格 | E6 UI/UX Designer |
 | React/Vue/Next 前端實作 | E7 Frontend Engineer |
 | API / DB / 後端邏輯實作 | E8 Backend Engineer |
-| 監視 sessions、輪詢狀態、phase gate 偵測、on-call 派工 | E9 Operations Monitor |
 | 測試計畫、bug 報告、ship 建議 | E10 QA Engineer |
 | CI/CD pipeline、部署程序、基礎設施監控、uptime/error-rate、incident runbooks | E11 DevOps/SRE Engineer |
 | 技術棧提案、架構設計、技術可行性評估、tech debt、跨產品一致性、架構演變規劃 | E12 System Architect |
