@@ -98,7 +98,6 @@ Spec → Assign → Execute → Validate → Next Task
 | E6 UI/UX Designer | UX | 3 | `UISpec` JSON |
 | E7 Frontend Engineer | FE | 4 | Frontend code + Manifest + API contracts |
 | E8 Backend Engineer | BE | 4 | Backend code + DB schema + API endpoints |
-| E9 Operations Monitor | OPS | Cross | Ops Report + Phase gate alerts + Stale-state watchdog |
 | E10 QA Engineer | QA | 5 | `TestPlan` + `BugReport` JSON |
 | E11 DevOps/SRE Engineer | DEVOPS | Cross | `OpsInfraReport` JSON |
 | E12 System Architect | ARCH | Cross | `ArchSpec` JSON |
@@ -110,7 +109,7 @@ Spec → Assign → Execute → Validate → Next Task
 
 ```
 .claude/
-├── agents/                      # 17 個 agent 定義文件
+├── agents/                      # 16 個 agent 定義文件
 │   ├── ceo.md                   # L0：策略決策層
 │   ├── pm.md                    # L1：SDD 協調層
 │   ├── hr.md                    # L1：Agent 設計層
@@ -122,7 +121,6 @@ Spec → Assign → Execute → Validate → Next Task
 │   ├── e6-ui-ux-designer.md     # Phase 3b：UI/UX 設計
 │   ├── e7-frontend-engineer.md  # Phase 4：前端工程
 │   ├── e8-backend-engineer.md   # Phase 4：後端工程
-│   ├── e9-ops-monitor.md        # Cross-phase：運維監控
 │   ├── e10-qa-engineer.md       # Phase 5：品質保證
 │   ├── e11-devops-sre.md        # Cross-phase：基礎設施
 │   ├── e12-system-architect.md  # Cross-phase：系統架構
@@ -140,13 +138,10 @@ Spec → Assign → Execute → Validate → Next Task
 │   ├── security_checker.md      # 安全基線核查
 │   ├── roster.md                # Agent 名冊查詢
 │   ├── assign.md                # 任務指派
-│   ├── watch.md                 # Session 監控
 │   ├── phase.md                 # Phase 狀態查詢
 │   ├── codex-executor.md        # 委派微任務給 OpenAI Codex
 │   ├── gemini-executor.md       # 委派微任務給 Google Gemini
-│   ├── ops-quick-commands.md    # E9 常用指令
-│   ├── e4-skills/               # E4 專屬：MVP 策略方法論（9 個技能）
-│   ├── e6-skills/               # E6 專屬：UI 設計模式（3 個技能）
+│   ├── e4-skills/               # E4 專屬：MVP 策略方法論
 │   ├── superpowers/             # E7/E8 專屬：brainstorm / write-plan / execute-plan
 │   └── hr-onboarding.md         # HR Agent 新增流程
 │
@@ -156,8 +151,7 @@ Spec → Assign → Execute → Validate → Next Task
 │   ├── assign.md                # /assign — 指派任務
 │   ├── phase-gate.md            # /phase-gate — 核查 Phase Gate
 │   ├── security-check.md        # /security-check — 安全基線核查
-│   ├── roster.md                # /roster — 查看 Agent 名冊
-│   └── watch.md                 # /watch — 監控 Session 狀態
+│   └── roster.md                # /roster — 查看 Agent 名冊
 │
 ├── directives/                  # CEO 指令歷史（供參考）
 │   └── CEO_DIRECTIVE_001.md
@@ -224,7 +218,6 @@ PM 會自動：
 | `/phase-gate` | 核查 Phase Gate 狀態 | PM skill: phase_gate_checker |
 | `/security-check` | 執行安全基線 SEC-01~09 核查 | PM skill: security_checker |
 | `/roster` | 查看所有 agent 名冊與職責 | PM skill: roster |
-| `/watch` | 監控 Session 與 agent 狀態 | E9 OPS + PM skill: watch |
 
 ---
 
