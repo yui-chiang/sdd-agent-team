@@ -66,7 +66,7 @@ PM 在啟動任何新專案時，必須：
 Input  : Product idea（文字描述）
 Output : Shipped MVP（code + design + validation reports）
 
-Agents : 13 個（含管理層）
+Agents : 12 個（含管理層）
   CEO（L0 最高決策層）
   PM（L1 執行協調層, SDD 模式）
   HR（L1 Agent 人才設計層）
@@ -78,7 +78,6 @@ Agents : 13 個（含管理層）
   E6 UI/UX Designer              — Phase 3b（串行，E5 後）
   E7 Frontend Engineer           — Phase 4（並行）
   E8 Backend Engineer            — Phase 4（並行）
-  E9 Operations Monitor          — Cross-phase
   E10 QA Engineer                — Phase 5
 
 SDD Cycle per task:
@@ -97,7 +96,6 @@ Human Operator
     PM ── HR     ← L1：PM 執行協調 / HR 負責 agent 增加與 onboarding
       │
   E1~E10         ← 功能執行層（各司其職，Domain Lock 嚴格執行）
-                   E9 Operations Monitor 為 cross-phase 監控角色
 ```
 
 **CEO**：唯一決策者，只通過 PM 下達指令；批准新增 agent（透過 HR 執行）
