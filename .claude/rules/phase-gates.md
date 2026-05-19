@@ -12,6 +12,7 @@
 [ ] P1-DC-001   DomainReport 已交付並通過 PM Validation（OVERALL: PASS）
 [ ] P1-ARCH-001 ArchSpec（E12）已交付並通過 PM Validation（OVERALL: PASS）
                 technical_feasibility_verdict = FEASIBLE 或 FEASIBLE_WITH_CONSTRAINTS
+                （若為 HIGH_RISK，PM 上報人工操作者，CEO 決定是否接受風險或要求 E12 提出降風險方案後重評）
                 （若為 NOT_FEASIBLE，PM 上報人工操作者，系統暫停）
 [ ] PRD v0.2 已發布（加入市場、競品 context）
 [ ] DomainReport.mvp_feasibility_verdict ≠ NOT_FEASIBLE（若為 NOT_FEASIBLE，上報人工操作者）
@@ -86,6 +87,8 @@ PM 必須將 `mvp_feasibility_verdict.blockers` 中的每一項加入 PRD 的 op
 [ ] P4-BE-001  Backend delivery（E8）已交付並通過 PM Validation（OVERALL: PASS）
 [ ] P4-AIE-001 AI delivery（E13）已交付並通過 PM Validation（OVERALL: PASS）
               （若產品無 AI 功能，標記 NOT_APPLICABLE 並在 PRD known_limitations 記錄理由）
+[ ] P4-ARCH-002 E12 Phase 4 架構審查已完成並通過 PM Validation
+               （必須在 E7/E8 提交最終 delivery 前完成；若實作偏離 ArchSpec，PM 發 revision spec）
 [ ] E7 FE manifest 的每個 api_contract endpoint 都已在 E8 BE manifest 中實作
 [ ] E7 FE 與 E8 BE 的 api_contracts 對齊（request/response shape 一致，無 mismatch）
 [ ] E13 AISpec 的 api_contracts 與 E8 BE manifest 對齊（AI 服務介面一致，無 mismatch）
@@ -104,7 +107,7 @@ PM 必須將 `mvp_feasibility_verdict.blockers` 中的每一項加入 PRD 的 op
 ---
 
 ## PHASE 5 GATE — Ship 決策條件
-> E8 QA Engineer 的 BugReport 通過後，PM 做最終 ship 決策
+> E10 QA Engineer 的 BugReport 通過後，PM 做最終 ship 決策
 
 ```
 [ ] P5-QA-001  TestPlan 已交付並通過 PM Validation
@@ -142,6 +145,7 @@ PM 發出 Phase N+1 spec 而 Phase N 未清  → 立即撤回 spec，補完 Phas
 E7/E8 並行中一方 FAIL                  → 等待 FAIL 方修改完成，兩者皆 APPROVED 才過 gate
 DomainReport 有 blockers               → 依「Blocker 解決路徑」表處理（見 Phase 1 GATE）
 DomainReport 為 NOT_FEASIBLE           → 上報人工操作者，PM 等待 CEO 指令，系統暫停
-Phase 1 三個 reports 有衝突             → PM 上報人工操作者，不自行裁決
+Phase 1 四個 reports 有衝突（含 E12）   → PM 上報人工操作者，不自行裁決
+P1-ARCH-001 (E12) FAIL                 → 等待 E12 revision 完成，四份報告皆 APPROVED 才過 gate
 Phase 5 為 DO_NOT_SHIP                 → 依「Phase 5 迭代路徑」執行修復與重測流程
 ```

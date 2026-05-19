@@ -66,19 +66,22 @@ PM 在啟動任何新專案時，必須：
 Input  : Product idea（文字描述）
 Output : Shipped MVP（code + design + validation reports）
 
-Agents : 12 個（含管理層）
+Agents : 15 個（含管理層）
   CEO（L0 最高決策層）
   PM（L1 執行協調層, SDD 模式）
   HR（L1 Agent 人才設計層）
-  E1 Market Research Analyst     — Phase 1（依序啟動）
-  E2 Competitor Analyst          — Phase 1（依序啟動，需 E1 輸出）
-  E3 Domain Consultant           — Phase 1（依序啟動，需 E1+E2 輸出）
-  E4 Product Strategist          — Phase 2
-  E5 Product Designer            — Phase 3a（串行）
-  E6 UI/UX Designer              — Phase 3b（串行，E5 後）
-  E7 Frontend Engineer           — Phase 4（並行）
-  E8 Backend Engineer            — Phase 4（並行）
+  E1  Market Research Analyst    — Phase 1（依序啟動）
+  E2  Competitor Analyst         — Phase 1（依序啟動，需 E1 輸出）
+  E3  Domain Consultant          — Phase 1（依序啟動，需 E1+E2 輸出）
+  E4  Product Strategist         — Phase 2
+  E5  Product Designer           — Phase 3a（串行）
+  E6  UI/UX Designer             — Phase 3b（串行，E5 後）
+  E7  Frontend Engineer          — Phase 4（並行）
+  E8  Backend Engineer           — Phase 4（並行）
   E10 QA Engineer                — Phase 5
+  E11 DevOps/SRE Engineer        — Cross-phase（Phase 4 後）
+  E12 System Architect           — Phase 1（並行）+ Phase 4（架構審查）
+  E13 AI Engineer                — Phase 4（並行，含 AI 功能時）
 
 SDD Cycle per task:
   Spec → Assign → Execute → Validate → Next task
@@ -91,11 +94,11 @@ SDD Cycle per task:
 ```
 Human Operator
       │
-    CEO          ← L0：策略決策，只發命令給 PM，不直接接觸 E1-E10
+    CEO          ← L0：策略決策，只發命令給 PM，不直接接觸 E1-E13
       │
     PM ── HR     ← L1：PM 執行協調 / HR 負責 agent 增加與 onboarding
       │
-  E1~E10         ← 功能執行層（各司其職，Domain Lock 嚴格執行）
+  E1~E13         ← 功能執行層（各司其職，Domain Lock 嚴格執行；E9 已移除）
 ```
 
 **CEO**：唯一決策者，只通過 PM 下達指令；批准新增 agent（透過 HR 執行）
@@ -107,7 +110,7 @@ Human Operator
 
 | Phase | 執行方式 | Agents | 輸出 |
 |---|---|---|---|
-| 1 — Discovery | 依序啟動（E1→E2→E3，各有依賴） | E1, E2, E3 | MarketReport / CompetitorReport / DomainReport |
+| 1 — Discovery | E1→E2→E3 依序；E12 與 E1 同時並行 | E1, E2, E3, E12 | MarketReport / CompetitorReport / DomainReport / ArchSpec |
 | 2 — Definition | 單一 | E4 | MVPDefinition（must-have ≤ 8）|
 | 3 — Design | 串行（E5 → E6） | E5, E6 | DesignSpec → UISpec |
 | 4 — Engineering | 並行 | E7, E8 | Frontend + Backend code |

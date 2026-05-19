@@ -91,7 +91,7 @@ SEQ       ：三位數，從 001 開始
 | PRD 版本 | 更新時機 |
 |---|---|
 | v0.1 | PM 收到 product idea，初始化 PRD |
-| v0.2 | Phase 1 APPROVED 後，加入市場 + 競品 context |
+| v0.2 | Phase 1 APPROVED 後，加入市場 + 競品 context 及技術架構可行性 context（E12 ArchSpec 摘要） |
 | v0.3 | Phase 2 APPROVED 後，加入完整 MVP scope |
 | v0.4 | Phase 3 APPROVED 後，加入設計決策 |
 | v0.5 | Phase 4 APPROVED 後，加入已知技術限制 |
