@@ -7,9 +7,12 @@
 > 全部打勾後，才可以發出 Phase 2 的第一個 Task Spec
 
 ```
-[ ] P1-MA-001  MarketReport 已交付並通過 PM Validation（OVERALL: PASS）
-[ ] P1-CA-001  CompetitorReport 已交付並通過 PM Validation（OVERALL: PASS）
-[ ] P1-DC-001  DomainReport 已交付並通過 PM Validation（OVERALL: PASS）
+[ ] P1-MA-001   MarketReport 已交付並通過 PM Validation（OVERALL: PASS）
+[ ] P1-CA-001   CompetitorReport 已交付並通過 PM Validation（OVERALL: PASS）
+[ ] P1-DC-001   DomainReport 已交付並通過 PM Validation（OVERALL: PASS）
+[ ] P1-ARCH-001 ArchSpec（E12）已交付並通過 PM Validation（OVERALL: PASS）
+                technical_feasibility_verdict = FEASIBLE 或 FEASIBLE_WITH_CONSTRAINTS
+                （若為 NOT_FEASIBLE，PM 上報人工操作者，系統暫停）
 [ ] PRD v0.2 已發布（加入市場、競品 context）
 [ ] DomainReport.mvp_feasibility_verdict ≠ NOT_FEASIBLE（若為 NOT_FEASIBLE，上報人工操作者）
 ```

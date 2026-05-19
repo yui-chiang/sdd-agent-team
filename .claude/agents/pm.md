@@ -182,6 +182,9 @@ PM 可使用 `codex-executor` 和 `gemini-executor` 處理**不需要完整 Task
 - 微任務輸出**不能**替代 E1-E10 的正式 Phase 交付物
 - PM 仍需對微任務輸出執行 binary PASS/FAIL 驗證
 - Domain Lock 仍適用：Codex 輸出 ≠ PM 自行寫 code（RULE-PM-01 不觸發）
+- **MVPDefinition.must_have 清單中的任何功能，禁止委派給 codex-executor，不論行數多少**
+- **同一功能不得拆分為多個微任務以規避 50 行限制**；合計超過 50 行或影響超過 2 個檔案 = 升級為正式 E7/E8 Task Spec
+- Validation Report 中若有使用 codex-executor，必須標注 `codex_assisted: true` 及呼叫次數
 
 ---
 

@@ -53,10 +53,10 @@ AC（Acceptance Criteria）的驗證結果只有：
 
 ```
 格式：[PHASE_CODE]-[AGENT_CODE]-[SEQ]
-範例：P1-MA-001, P2-PS-001, P4-FE-001
+範例：P1-MA-001, P1-ARCH-001, P2-PS-001, P4-FE-001
 
 PHASE_CODE：P1 / P2 / P3 / P4 / P5
-AGENT_CODE：MA / CA / DC / PS / PD / FE / BE / QA
+AGENT_CODE：MA / CA / DC / PS / PD / UX / FE / BE / QA / ARCH / DEVOPS / AIE
 SEQ       ：三位數，從 001 開始
 ```
 
